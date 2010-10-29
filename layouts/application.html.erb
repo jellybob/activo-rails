@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title><%= @title || "Untitled Page" %></title>
+  
+  <%= stylesheet_link_tag "jquery-ui.css", :media => "screen" %>
+  <%= stylesheet_link_tag "base.css", :media => "screen" %>
+  <%= stylesheet_link_tag "jquery.tipsy.css", :media => "screen" %>
+  <%= stylesheet_link_tag "activo/activo.css", :media => "screen", :id => "current-theme" %>
+  <!--[if IE]>
+    <%= stylesheet_link_tag "activo/activo-ie.css", :media => "screen" %>
+  <![endif]-->
+  <%= stylesheet_link_tag "activo-attrtastic/attrtastic_changes.css", :media => "screen" %>
+  <%= stylesheet_link_tag "activo-formtastic/formtastic.css", :media => "screen" %>
+  <%= stylesheet_link_tag "activo-formtastic/formtastic_changes.css", :media => "screen" %>
+  
+  <%= javascript_include_tag "jquery-1.3.min.js" %>
+  <%= javascript_include_tag "jquery-ui.min.js" %>
+  <%= javascript_include_tag "jquery.scrollTo.js" %>
+  <%= javascript_include_tag "jquery.localscroll.js" %>
+  <%= javascript_include_tag "application.js" %>
+  <%= javascript_include_tag "jquery.tipsy.js" %>
+  
+  <%= yield :head %>
+</head>
+
+<body>
+  <div id="container">
+    <div id="header">
+      <div id='status'>
+        <%= yield :status %>
+      </div>
+      <h1><a href="index.html"></a></h1>
+      <div id="user-navigation">
+        <ul class="wat-cf">
+          <%= yield :user_navigation %>
+        </ul>
+      </div>
+      <div id="main-navigation">
+        <ul class="wat-cf">
+          <%= yield :main_navigation %>
+        </ul>
+      </div>
+    </div>
+    <div id="wrapper" class="wat-cf">
+      <div id="main">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

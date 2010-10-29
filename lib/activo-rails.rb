@@ -1,3 +1,5 @@
+require 'activo-rails/helper'
+
 module ActivoRails
   class Engine < Rails::Engine
     config.mount_at = '/activo/'

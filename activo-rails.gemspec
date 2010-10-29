@@ -4,7 +4,7 @@ require "activo-rails/version"
 
 Gem::Specification.new do |s|
   s.name        = "activo-rails"
-  s.version     = Activo::Rails::VERSION
+  s.version     = ActivoRails::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jon Wood"]
   s.email       = ["jon@blankpad.net"]

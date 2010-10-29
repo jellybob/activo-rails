@@ -28,6 +28,7 @@ module ActivoRails
     # - icons are loaded from images/icons/16x16/ and assumed to be in png format.
     def controls(*items)
       item_list("div", items, :class => "control") do |item|
+        item[:class] ||= ""
         item[:class] << " button"
         content_tag("a", item[:class], :href => item[:href]) do
           image_tag("images/icons/16x16/#{item[:icon]}.png", :alt => item[:label]) + " "  + item[:label]

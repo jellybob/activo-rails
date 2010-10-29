@@ -7,7 +7,7 @@ module ActivoRails
     #     :href    => root_path,
     #     :class   => "active" # optional
     #   }
-    def secondary_navigation(items = [])
+    def secondary_navigation(*items)
       content_tag("div", :class => "secondary-navigation") do
         item_list("ul", items, :class => "wat-cf") do |item|
           content = item.delete(:content)
@@ -26,7 +26,7 @@ module ActivoRails
     #     :icon  => "new_item"
     #   }
     # - icons are loaded from images/icons/16x16/ and assumed to be in png format.
-    def controls(items = [])
+    def controls(*items)
       item_list("div", items, :class => "control") do |item|
         item[:class] << " button"
         content_tag("a", item[:class], :href => item[:href]) do
@@ -42,7 +42,7 @@ module ActivoRails
     #     :href  => root_path,
     #     :active => true
     #   }
-    def breadcrumbs(items = [])
+    def breadcrumbs(*items)
       content_tag("div", :class => "breadcrumb") do
         item_list("ul", items) do |item|
           active = item.delete(:active)

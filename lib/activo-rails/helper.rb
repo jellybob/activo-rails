@@ -5,7 +5,7 @@ module ActivoRails
     #   navigation: An array of navigation items to place at the top of the block.
     #   controls: An array of controls to place at the top of the block.
     #   breadcrubms: An array of breadcrumbs to place at the bottom of the block.
-    def content_block(type, options = {}, &content)
+    def content_block(options = {}, &content)
       content_tag("div", :class => "block") do
         yield
       end

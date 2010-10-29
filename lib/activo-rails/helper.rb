@@ -1,16 +1,5 @@
 module ActivoRails
   module Helper
-    # Creates a new content block.
-    # - Takes the following options:
-    #   navigation: An array of navigation items to place at the top of the block.
-    #   controls: An array of controls to place at the top of the block.
-    #   breadcrubms: An array of breadcrumbs to place at the bottom of the block.
-    def content_block(options = {}, &content)
-      content_tag("div", :class => "block") do
-        yield
-      end
-    end
-    
     # Creates a navigation menu.
     # - items should have the following format:
     #   {

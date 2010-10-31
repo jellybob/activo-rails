@@ -1,0 +1,18 @@
+<% page_title "Hello, world!" %>
+
+<div class="block">
+  <%= secondary_navigation do |n|
+    n.item "Another Page", root_path
+    n.item "Page 4", root_path, :active => true
+  end %>
+  <div class="content">
+    <%= controls do |c|
+      c.control "New Item", root_path, :icon => "add"
+    end %>
+  </div>
+  <%= breadcrumbs do |b|
+    b.crumb "Home", root_path
+    b.crumb "Somewhere else", root_path
+    b.crumb "Hello, world!", root_path, :active => true
+  end %>
+</div>

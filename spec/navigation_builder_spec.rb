@@ -36,6 +36,26 @@ describe ActivoRails::Helper::NavigationBuilder do
       builder.item_list[0][:class].should_not match(/active/)
       builder.item_list[1][:class].should match(/active/)
     end
+
+    it "defaults link_options to an empty hash" do
+      builder.item("New Item", "")
+      builder.item_list[0][:link_options].should eq({})
+    end
+
+    it "sets the method on link_options if provided" do
+      builder.item("New Item", "", :method => :delete)
+      builder.item_list[0][:link_options].should eq({ :method => :delete })
+    end
+
+    it "sets the icon if provided" do
+      builder.item("New Item", "", :icon => "new")
+      builder.item_list[0][:icon].should eq("new")
+    end
+
+    it "defaults the icon to the title if not provided" do
+      builder.item("Delete", "")
+      builder.item_list[0][:icon].should eq("delete")
+    end
   end
 
   it { should respond_to(:item_list) }

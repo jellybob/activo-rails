@@ -89,7 +89,7 @@ describe ActivoRails::Helper do
       let(:menu) do
         content = view.secondary_navigation do |nav|
           nav.item "Item 1", "/", :class => "foo"
-          nav.item "Item 2", "/item2"
+          nav.item "Item 2", "/item2", :method => :delete
         end
 
         Nokogiri::HTML(content)
@@ -119,6 +119,61 @@ describe ActivoRails::Helper do
       it "applies any classes to the node" do
         classes = menu.css("div.secondary-navigation ul li:first-child")[0].attribute("class")
         classes.value.split(" ").should include("foo")
+      end
+
+      it "passes link options to the link" do
+        method = menu.css("div.secondary-navigation ul li:last-child a")[0].attribute("data-method")
+        method.value.should eq("delete")
+      end
+    end
+  end
+
+  describe "creating a control set" do
+    it { should respond_to(:controls) }
+
+    it "should create the control wrapper" do
+      content = view.controls
+
+      doc = Nokogiri::HTML(content)
+      doc.css("div.control").should_not be_empty
+    end
+
+    it "should merge any provided options for the wrapper" do
+      content = view.controls(:id => "foo")
+      
+      doc = Nokogiri::HTML(content)
+      doc.css("div.control#foo").should_not be_empty
+    end
+    
+    it "should yield a navigation builder" do
+      view.controls do |c|
+        c.should be_instance_of(ActivoRails::Helper::NavigationBuilder)
+      end
+    end
+
+    context "when rendering the controls" do
+      let(:buttons) do
+        content = view.controls do |c|
+          c.item "Copy", "/people/2/copy", :icon => "copy_person"
+          c.item "Delete", "/people/2", :method => :delete
+        end
+        Nokogiri::HTML(content)
+      end
+
+      it "should display the correct number of items" do
+        buttons.css("div.control a").should have(2).nodes
+      end
+
+      it "should display each item in order" do
+        items = buttons.css("div.control a")
+        items[0].content.should eq("Copy")
+        items[1].content.should eq("Delete")
+      end
+
+      it "should link each item correctly" do
+        items = buttons.css("div.control a")
+        items[0].attribute("href").value.should eq("/people/2/copy")
+        items[1].attribute("href").value.should eq("/people/2")
       end
     end
   end

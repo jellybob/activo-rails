@@ -67,42 +67,52 @@ module ActivoRails
         content_tag("ul", "", :class => "wat-cf") do
           menu.item_list.collect { |item|
             content_tag("li", :class => item[:class]) do
-              link_to(item[:label], item[:href])
+              link_to(item[:label], item[:href], item[:link_options])
             end
           }.join("")
         end
       end
     end
-
-#    def secondary_navigation(*items)
-#      content_tag("div", :class => "secondary-navigation") do
-#        item_list("ul", items, :class => "wat-cf") do |item|
-#          content = item.delete(:content)
-#          content_tag("li") do
-#            content_tag("a", content, item)
-#          end
+    
+    # Creates a set of buttons
+    # 
+    # options - A hash of attributes to apply to the wrapping div tag
+    # 
+    # Example:
+    #   <div class="block">
+    #     <div class="content">
+    #       <%= controls do |c|
+    #         c.item "Copy", copy_person_path(person), :icon => "copy_person"
+    #         c.item "Delete", person_path(person), :method => :delete
+    #       %>
+    #     </div>
+    #   </div>
+    #   
+    # Returns a set of controls to be displayed.
+    def controls(options = {})
+      options[:class] ||= ""
+      options[:class] << " control"
+      options[:class].strip!
+      
+      items = NavigationBuilder.new
+      yield items if block_given?
+      
+      content_tag("div", options) do
+        items.item_list.collect { |item|
+          link_to(item[:label], item[:href], item[:link_options].merge(:class => "button"))
+        }.join("")
+      end
+    end
+#    def controls(*items)
+#      item_list("div", items, :class => "control") do |item|
+#        item[:class] ||= ""
+#        item[:class] = item[:class].split(" ")
+#        item[:class] << "button"
+#        content_tag("a", item[:class].join(" "), :href => item[:href]) do
+#          icon(item[:icon], :small, :alt => item[:label]) + " "  + item[:label]
 #        end
 #      end
 #    end
-    
-    # Creates a set of buttons
-    # - items should have the following format:
-    #   {
-    #     :label => "New Item",
-    #     :href  => root_path,
-    #     :icon  => "new_item"
-    #   }
-    # - icons are loaded from images/icons/16x16/ and assumed to be in png format.
-    def controls(*items)
-      item_list("div", items, :class => "control") do |item|
-        item[:class] ||= ""
-        item[:class] = item[:class].split(" ")
-        item[:class] << "button"
-        content_tag("a", item[:class].join(" "), :href => item[:href]) do
-          icon(item[:icon], :small, :alt => item[:label]) + " "  + item[:label]
-        end
-      end
-    end
 
     # Creates a breadcrumb trail
     # - items should have the following format:
@@ -160,10 +170,15 @@ module ActivoRails
         options[:class] << " first" if item_list.empty?
         options[:class] << " active" if options[:active]
         
+        options[:link_options] = {}
+        options[:link_options][:method] = options[:method] if options[:method]
+
         item_list << {
           :label => label,
           :href => path,
-          :class => options[:class].strip
+          :class => options[:class].strip,
+          :link_options => options[:link_options],
+          :icon => options[:icon] || label.downcase.underscore
         }
       end
     end

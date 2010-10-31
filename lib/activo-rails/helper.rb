@@ -1,5 +1,20 @@
 module ActivoRails
   module Helper
+    # Outputs an icon
+    def icon(name, size = :small, options = {})
+      width = case size
+        when :small
+          "16"
+        when :large
+          "32"
+      end
+
+      options[:alt] ||= name.capitalize
+      options[:title] ||= options[:alt]
+      
+      image_tag("images/icons/#{width}x#{width}/#{name}.png", options)
+    end
+    
     # Creates a navigation menu.
     # - items should have the following format:
     #   {
@@ -32,7 +47,7 @@ module ActivoRails
         item[:class] = item[:class].split(" ")
         item[:class] << "button"
         content_tag("a", item[:class].join(" "), :href => item[:href]) do
-          image_tag("images/icons/16x16/#{item[:icon]}.png", :alt => item[:label]) + " "  + item[:label]
+          icon(item[:icon], :small, :alt => item[:label]) + " "  + item[:label]
         end
       end
     end

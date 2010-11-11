@@ -130,7 +130,7 @@ module ActivoRails
           item[:class] << " active" if active
 
           content_tag("li", item) do
-            if item[:active]
+            if active
               content
             else
               link_to(content, href)

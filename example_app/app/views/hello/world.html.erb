@@ -10,9 +10,8 @@
       c.item "New Item", root_path, :icon => "add"
     end %>
   </div>
-  <%= breadcrumbs do |b|
-    b.crumb "Home", root_path
-    b.crumb "Somewhere else", root_path
-    b.crumb "Hello, world!", root_path, :active => true
-  end %>
+  <%= breadcrumbs (
+      {:label => 'Home', :href => root_path},
+      {:label => 'Somewhere else', :href => root_path},
+      {:label => 'Hello, World!', :href => root_path, :active => true}) %>
 </div>

@@ -103,16 +103,6 @@ module ActivoRails
         }.join("")
       end
     end
-#    def controls(*items)
-#      item_list("div", items, :class => "control") do |item|
-#        item[:class] ||= ""
-#        item[:class] = item[:class].split(" ")
-#        item[:class] << "button"
-#        content_tag("a", item[:class].join(" "), :href => item[:href]) do
-#          icon(item[:icon], :small, :alt => item[:label]) + " "  + item[:label]
-#        end
-#      end
-#    end
 
     # Creates a breadcrumb trail
     # - items should have the following format:

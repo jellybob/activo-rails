@@ -143,49 +143,6 @@ module ActivoRails
         end
       end
     end
-
-    # Creates a breadcrumb trail
-    # - items should have the following format:
-    #   {
-    #     :label => "Item 1",
-    #     :href  => root_path,
-    #     :active => true
-    #   }
-#    def breadcrumbs(*items)
-#      content_tag("div", :class => "breadcrumb") do
-#        item_list("ul", items) do |item|
-#          active = item.delete(:active)
-#          content = item.delete(:label)
-#          href = item.delete(:href)
-#          item[:class] << " active" if active
-#
-#          content_tag("li", item) do
-#            if item[:active]
-#              content
-#            else
-#              link_to(content, href)
-#            end
-#          end
-#        end
-#      end
-#    end
-
-    def item_list(tag, items, tag_options = {}, &template)
-      content_tag(tag, tag_options) do
-        first = true
-        list = items.collect do |item|
-          classes = []
-          classes << item[:class].split(" ") if item[:class]
-          if first
-            classes << "first"
-            first = false
-          end
-          item[:class] = classes.join(" ")
-          yield item
-        end
-        list.join("")
-      end
-    end
     
     # Assists in the creation of navigation menus
     class NavigationBuilder

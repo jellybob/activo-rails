@@ -185,14 +185,14 @@ describe ActivoRails::Helper do
       content = view.breadcrumbs
       
       doc = Nokogiri::HTML(content)
-      doc.css("div").should_not be_empty
+      doc.css("div.breadcrumb").should_not be_empty
     end
 
     it "should merge any options with the wrapper div" do
       content = view.breadcrumbs(:id => "foo")
 
       doc = Nokogiri::HTML(content)
-      doc.css("div#foo").should_not be_empty
+      doc.css("div#foo.breadcrumb").should_not be_empty
     end
 
     it "should yield a navigation builder" do
@@ -202,7 +202,47 @@ describe ActivoRails::Helper do
     end
 
     context "when provided with some breadcrumbs" do
+      let(:breadcrumbs) do
+        content = view.breadcrumbs do |b|
+          b.item "Home", "/"
+          b.item "News", "/news/", :class => "news"
+          b.item "Awesome New Things", "/news/awesome-new-things", :active => true
+        end
+        Nokogiri::HTML(content)
+      end
       
+      it "should wrap the items in an unordered list" do
+        breadcrumbs.css("div ul").should_not be_empty
+      end
+
+      it "should display the correct number of items" do
+        breadcrumbs.css("ul li").should have(3).nodes
+      end
+
+      it "should render each item as a link" do
+        breadcrumbs.css("ul li a").should have(3).nodes
+      end
+      
+      describe "the breadcrumbs" do
+        let(:items) { breadcrumbs.css("ul li a") }
+        
+        it "should be displayed in the correct order" do
+          items[0].content.should eq("Home")
+          items[1].content.should eq("News")
+          items[2].content.should eq("Awesome New Things")
+        end
+
+        it "should link to the correct locations" do
+          items[0].attribute("href").value.should eq("/")
+          items[1].attribute("href").value.should eq("/news/")
+          items[2].attribute("href").value.should eq("/news/awesome-new-things")
+        end
+
+        it "should apply link options" do
+          items[1].attribute("class").value.should eq("news")
+          items[2].attribute("class").value.should eq("active")
+        end
+      end
     end
   end
 end

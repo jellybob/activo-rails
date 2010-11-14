@@ -125,8 +125,23 @@ module ActivoRails
     def breadcrumbs(options = {})
       items = NavigationBuilder.new
       yield items if block_given?
+      
+      options[:class] ||= ""
+      options[:class] << " breadcrumb"
+      options[:class].strip!
+      
+      content_tag("div", options) do
+        content_tag("ul") do
+          items.item_list.collect { |item|
+            content_tag("li") do
+              item[:link_options] ||= {}
+              item[:link_options][:class] = item[:class]
 
-      content_tag("div", "", options)
+              link_to(item[:label], item[:href], item[:link_options])
+            end
+          }.join("")
+        end
+      end
     end
 
     # Creates a breadcrumb trail
@@ -184,7 +199,7 @@ module ActivoRails
         options[:class] ||= ""
         options[:class] << " first" if item_list.empty?
         options[:class] << " active" if options[:active]
-        
+                
         options[:link_options] = {}
         options[:link_options][:method] = options[:method] if options[:method]
 

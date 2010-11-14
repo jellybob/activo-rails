@@ -177,4 +177,32 @@ describe ActivoRails::Helper do
       end
     end
   end
+
+  describe "#breadcrumbs" do
+    it { should respond_to(:breadcrumbs) } 
+
+    it "should create the breadcrumb wrapper" do
+      content = view.breadcrumbs
+      
+      doc = Nokogiri::HTML(content)
+      doc.css("div").should_not be_empty
+    end
+
+    it "should merge any options with the wrapper div" do
+      content = view.breadcrumbs(:id => "foo")
+
+      doc = Nokogiri::HTML(content)
+      doc.css("div#foo").should_not be_empty
+    end
+
+    it "should yield a navigation builder" do
+      view.breadcrumbs do |b|
+        b.should be_instance_of(ActivoRails::Helper::NavigationBuilder)
+      end
+    end
+
+    context "when provided with some breadcrumbs" do
+      
+    end
+  end
 end

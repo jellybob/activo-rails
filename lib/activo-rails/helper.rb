@@ -103,6 +103,31 @@ module ActivoRails
         }.join("")
       end
     end
+    
+    # Displays a breadcrumb trail
+    # 
+    # options - A hash of attributes to apply to the wrapping div tag
+    # 
+    # Example:
+    #   <div class="block">
+    #     <div class="content">
+    #       <h2><%= @news_item.title %></h2>
+    #       <p><%= @news_item.content %></p>
+    #     </div>
+    #     <%= breadcrumbs do |b|
+    #       b.item "Home", root_path
+    #       b.item "News", news_path
+    #       b.item "Awesome New Things", news_path(@news_item), :active => true
+    #     %>
+    #   </div>
+    # 
+    # Returns the breadcrumb trail.
+    def breadcrumbs(options = {})
+      items = NavigationBuilder.new
+      yield items if block_given?
+
+      content_tag("div", "", options)
+    end
 
     # Creates a breadcrumb trail
     # - items should have the following format:
@@ -111,24 +136,24 @@ module ActivoRails
     #     :href  => root_path,
     #     :active => true
     #   }
-    def breadcrumbs(*items)
-      content_tag("div", :class => "breadcrumb") do
-        item_list("ul", items) do |item|
-          active = item.delete(:active)
-          content = item.delete(:label)
-          href = item.delete(:href)
-          item[:class] << " active" if active
-
-          content_tag("li", item) do
-            if item[:active]
-              content
-            else
-              link_to(content, href)
-            end
-          end
-        end
-      end
-    end
+#    def breadcrumbs(*items)
+#      content_tag("div", :class => "breadcrumb") do
+#        item_list("ul", items) do |item|
+#          active = item.delete(:active)
+#          content = item.delete(:label)
+#          href = item.delete(:href)
+#          item[:class] << " active" if active
+#
+#          content_tag("li", item) do
+#            if item[:active]
+#              content
+#            else
+#              link_to(content, href)
+#            end
+#          end
+#        end
+#      end
+#    end
 
     def item_list(tag, items, tag_options = {}, &template)
       content_tag(tag, tag_options) do

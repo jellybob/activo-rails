@@ -65,7 +65,7 @@ module ActivoRails
       
       content_tag("div", options) do
         content_tag("ul", "", :class => "wat-cf") do
-          menu.item_list.collect { |item|
+          menu.collect { |item|
             content_tag("li", :class => item[:class]) do
               link_to(item[:label], item[:href], item[:link_options])
             end
@@ -98,7 +98,7 @@ module ActivoRails
       yield items if block_given?
       
       content_tag("div", options) do
-        items.item_list.collect { |item|
+        items.collect { |item|
           link_to(item[:label], item[:href], item[:link_options].merge(:class => "button"))
         }.join("")
       end
@@ -132,7 +132,7 @@ module ActivoRails
       
       content_tag("div", options) do
         content_tag("ul") do
-          items.item_list.collect { |item|
+          items.collect { |item|
             content_tag("li") do
               item[:link_options] ||= {}
               item[:link_options][:class] = item[:class]
@@ -147,9 +147,14 @@ module ActivoRails
     # Assists in the creation of navigation menus
     class NavigationBuilder
       attr_reader :item_list
+      include Enumerable
       
       def initialize
         @item_list = []
+      end
+      
+      def each(&blk)
+        item_list.each(&blk)
       end
 
       def item(label, path, options = {})

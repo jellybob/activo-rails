@@ -15,7 +15,7 @@ describe ActivoRails::Helper::NavigationBuilder do
         "Item 2"
       ])
     end
-
+    
     it "sets the path to the one provided" do
       builder.item("New Item", "/new")
       builder.item_list.first[:href].should eq("/new")
@@ -63,5 +63,10 @@ describe ActivoRails::Helper::NavigationBuilder do
     it "defaults to an empty array" do
       builder.item_list.should eq([])
     end
+  end
+
+  describe "iteration" do
+    it { should respond_to(:each) }
+    it { should respond_to(:collect) }
   end
 end

@@ -51,6 +51,11 @@
     </div>
     <div id="wrapper" class="wat-cf">
       <div id="main">
+        <div class="flash">
+          <% [ :warning, :notice, :error ].each do |f| -%>
+            <%= content_tag("div", flash[f], :class => "message #{f}") unless flash[f].nil? %>
+          <% end %>
+        </div>
         <%= yield %>
       </div>
     </div>

@@ -53,7 +53,7 @@
       <div id="main">
         <div class="flash">
           <% [ :warning, :notice, :error ].each do |f| -%>
-            <%= content_tag("div", flash[f], :class => "message #{f}") unless flash[f].nil? %>
+            <%= content_tag("div", "<p>#{flash[f]}</p>".html_safe, :class => "message #{f}") unless flash[f].nil? %>
           <% end %>
         </div>
         <%= yield %>

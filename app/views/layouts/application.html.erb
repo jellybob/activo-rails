@@ -28,20 +28,26 @@
 <body>
   <div id="container">
     <div id="header">
-      <div id='status'>
-        <%= yield :status %>
-      </div>
+      <% if respond_to? :status_menu -%>
+        <div id='status'>
+          <%= status_menu %>
+        </div>
+      <%- end %>
       <h1><a href="index.html"></a></h1>
-      <div id="user-navigation">
-        <ul class="wat-cf">
-          <%= yield :user_navigation %>
-        </ul>
-      </div>
-      <div id="main-navigation">
-        <ul class="wat-cf">
-          <%= yield :main_navigation %>
-        </ul>
-      </div>
+      <% if respond_to? :user_navigation -%>
+        <div id="user-navigation">
+          <ul class="wat-cf">
+            <%= user_navigation %>
+          </ul>
+        </div>
+      <%- end %>
+      <% if respond_to? :main_navigation -%>
+        <div id="main-navigation">
+          <ul class="wat-cf">
+            <%= main_navigation %>
+          </ul>
+        </div>
+      <%- end %>
     </div>
     <div id="wrapper" class="wat-cf">
       <div id="main">

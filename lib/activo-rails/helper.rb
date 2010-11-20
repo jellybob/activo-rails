@@ -31,6 +31,7 @@ module ActivoRails
     # Returns an image tag, ready to be displayed in a template.
     def icon(name, size = :small, options = {})
       dimension = (size == :small) ? "16" : "32"
+      dimension.html_safe!
       options[:alt] ||= name.capitalize
       
       image_tag("/images/icons/#{dimension}x#{dimension}/#{name}.png", {
@@ -56,8 +57,8 @@ module ActivoRails
     #   
     # Returns a secondary navigation block to be displayed.
     def secondary_navigation(options = {})
-      options[:class] ||= ""
-      options[:class] << " secondary-navigation"
+      options[:class] ||= "".html_safe
+      options[:class] << " secondary-navigation".html_safe
       options[:class].strip!
       
       menu = NavigationBuilder.new
@@ -69,7 +70,7 @@ module ActivoRails
             content_tag("li", :class => item[:class]) do
               link_to(item[:label], item[:href], item[:link_options])
             end
-          }.join("")
+          }.join("").html_safe
         end
       end
     end
@@ -90,8 +91,8 @@ module ActivoRails
     #   
     # Returns a set of controls to be displayed.
     def controls(options = {})
-      options[:class] ||= ""
-      options[:class] << " control"
+      options[:class] ||= "".html_safe
+      options[:class] << " control".html_safe
       options[:class].strip!
       
       items = NavigationBuilder.new
@@ -100,7 +101,7 @@ module ActivoRails
       content_tag("div", options) do
         items.collect { |item|
           link_to(item[:label], item[:href], item[:link_options].merge(:class => "button"))
-        }.join("")
+        }.join("").html_safe
       end
     end
     
@@ -126,8 +127,8 @@ module ActivoRails
       items = NavigationBuilder.new
       yield items if block_given?
       
-      options[:class] ||= ""
-      options[:class] << " breadcrumb"
+      options[:class] ||= "".html_safe
+      options[:class] << " breadcrumb".html_safe
       options[:class].strip!
       
       content_tag("div", options) do

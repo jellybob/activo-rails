@@ -84,7 +84,7 @@ module ActivoRails
     #       <%= controls do |c|
     #         c.item "Copy", copy_person_path(person), :icon => "copy_person"
     #         c.item "Delete", person_path(person), :method => :delete
-    #       %>
+    #       end %>
     #     </div>
     #   </div>
     #   
@@ -99,6 +99,7 @@ module ActivoRails
       
       content_tag("div", options) do
         items.collect { |item|
+          item[:label] = (icon(item[:icon]) + item[:label]).html_safe if item[:icon]
           link_to(item[:label], item[:href], item[:link_options].merge(:class => "button"))
         }.join("").html_safe
       end

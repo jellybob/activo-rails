@@ -51,7 +51,7 @@
       <%- end %>
     </div>
     <div id="wrapper" class="wat-cf">
-      <div id="main">
+      <div id="<%= if (@full_width) ? 'full_main' : 'main' %>">
         <div class="flash">
           <% [ :warning, :notice, :error ].each do |f| -%>
             <%= content_tag("div", "<p>#{flash[f]}</p>".html_safe, :class => "message #{f}") unless flash[f].nil? %>

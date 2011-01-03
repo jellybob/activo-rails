@@ -226,3 +226,12 @@ Fixing jQuery UI image paths: Mike Park (http://github.com/mikepinde/)
 
 And thanks to the people brave enough to use this before it was released, or even had a readme, for provoking me into
 actually releasing the damn thing.
+
+## License ##
+
+All original components of activo-rails are licensed under the MIT license:
+
+Copyright (c) 2011, Jon Wood
+
+That doesn't cover the Activo theme itself, the FatCow icon set, or jQuery, which remain under their original licenses 
+and the property of their original authors.

@@ -233,28 +233,45 @@ describe ActivoRails::Helper do
         breadcrumbs.css("ul li").should have(3).nodes
       end
 
-      it "should render each item as a link" do
-        breadcrumbs.css("ul li a").should have(3).nodes
+      it "should render each inactive item as a link" do
+        breadcrumbs.css("ul li a").should have(2).nodes
       end
       
-      describe "the breadcrumbs" do
+      describe "the list items" do
+        let(:items) { breadcrumbs.css("ul li") }
+
+        it "should set the class of first on the first item" do
+          items[0].attribute("class").value.should eq("first")
+        end
+
+        it "should set the class of active on the active item" do
+          items[2].attribute("class").value.should eq("active")
+        end
+        
+        it "should not link an active item" do
+          items[2].css("a").should be_empty
+        end
+        
+        it "should place the content of the active item directly in the list item" do
+          items[2].content.should eq("Awesome New Things")
+        end
+
+        it "should set specified classes when requested" do
+          items[1].attribute("class").value.should eq("news")
+        end
+      end
+
+      describe "the links" do
         let(:items) { breadcrumbs.css("ul li a") }
         
         it "should be displayed in the correct order" do
           items[0].content.should eq("Home")
           items[1].content.should eq("News")
-          items[2].content.should eq("Awesome New Things")
         end
 
         it "should link to the correct locations" do
           items[0].attribute("href").value.should eq("/")
           items[1].attribute("href").value.should eq("/news/")
-          items[2].attribute("href").value.should eq("/news/awesome-new-things")
-        end
-
-        it "should apply link options" do
-          items[1].attribute("class").value.should eq("news")
-          items[2].attribute("class").value.should eq("active")
         end
       end
     end

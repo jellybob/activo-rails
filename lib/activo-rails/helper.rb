@@ -136,11 +136,12 @@ module ActivoRails
       content_tag("div", options) do
         content_tag("ul") do
           items.collect { |item|
-            content_tag("li") do
-              item[:link_options] ||= {}
-              item[:link_options][:class] = item[:class]
-
-              link_to(item[:label], item[:href], item[:link_options])
+            content_tag("li", :class => item[:class]) do
+              if item[:active]
+                item[:label]
+              else
+                link_to(item[:label], item[:href])
+              end
             end
           }.join("")
         end
@@ -173,7 +174,8 @@ module ActivoRails
           :href => path,
           :class => options[:class].strip,
           :link_options => options[:link_options],
-          :icon => options[:icon]
+          :icon => options[:icon],
+          :active => !!options[:active]
         }
       end
     end

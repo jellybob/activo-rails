@@ -25,10 +25,10 @@ A basic view, with a single content block, and a page title would look something
 
     <% page_title "Hello, world!" %>
 
-    <div class#"block">
-      <div class#"content">
+    <div class="block">
+      <div class="content">
         <h2>Hello, World!</h2>
-        <div class#"inner">
+        <div class="inner">
           <p>This is a basic Activo template.</p>
         </div>
       </div>
@@ -57,7 +57,7 @@ To display icons use the `icon` helper. Activo includes the Fatcow icons from ww
 which are licensed under the Creative Commons Attribution 3.0 license. It's up to you to either
 comply with that license, or replace them with something else.
 
-    <%# icon "delete", :large, :alt #> "Delete Item" %>
+    <%= icon "delete", :large, :alt => "Delete Item" %>
 
 The first argument is the filename of the icon, without extension.
 
@@ -72,15 +72,15 @@ The `secondary_navigation` helper is used to add some tabs to the top of a conte
     
     <% page_title "About Us" %>
 
-    <div class#"block">
-      <%# secondary_navigation do |n|
-        n.item "The Company", about_path("company"), :active #> true
+    <div class="block">
+      <%= secondary_navigation do |n|
+        n.item "The Company", about_path("company"), :active => true
         n.item "Our Offices", about_path("offices")
-        n.item "Jobs", about_path("jobs"), :class #> "highlighted"
+        n.item "Jobs", about_path("jobs"), :class => "highlighted"
       end %>
-      <div class#"content">
+      <div class="content">
         <h2>About Us</h2>
-        <div class#"inner">
+        <div class="inner">
           <p>We're an amazing company! We do things!</p>
           <p>To find out more, click the tabs above.</p>
         </div>
@@ -100,17 +100,17 @@ They're added using the `breadcrumbs` helper.
 
     <% page_title "News Item 3" %>
 
-    <div class#"block">
-      <div class#"content">
+    <div class="block">
+      <div class="content">
         <h2>News Item 3</h2>
-        <div class#"inner">
+        <div class="inner">
           <p>We've got some new news here. Read all about it!</p>
         </div>
       </div>
-      <%# breadcrumbs do |b|
+      <%= breadcrumbs do |b|
         b.item "Home", root_path
         b.item "News", news_path
-        b.item "News Item 3", news_path(3), :active #> true
+        b.item "News Item 3", news_path(3), :active => true
       end %> 
     </div>
 
@@ -122,14 +122,14 @@ To add a set of buttons to the top of a block, use the `controls` helper.
 
     <% page_title "News Item 3 (Admin Mode)" %>
 
-    <div class#"block">
-      <div class#"content">
-        <%# controls do |c|
-          c.item "Delete", news_path(3), :link_options #> { :method #> :delete, :confirm #> "Really delete News Item 3?" }, :icon #> "delete"
-          c.item "Edit", edit_news_path(3), :icon #> "edit"
+    <div class="block">
+      <div class="content">
+        <%= controls do |c|
+          c.item "Delete", news_path(3), :link_options => { :method => :delete, :confirm => "Really delete News Item 3?" }, :icon => "delete"
+          c.item "Edit", edit_news_path(3), :icon => "edit"
         end %>
         <h2>News Item 3</h2>
-        <div class#"inner">
+        <div class="inner">
           <p>We've got some new news here. Read all about it!</p>
         </div>
       </div>
@@ -156,7 +156,7 @@ will be passed a NavigationBuilder instance which can be filled with items.
     module ApplicationHelper
       def main_navigation(menu)
         menu.item "Home", root_path
-        menu.iten "News", news_path, :active #> true
+        menu.iten "News", news_path, :active => true
       end
     end
 
@@ -180,8 +180,8 @@ The sidebar is filled by a `sidebar` helper if one exists.
     
     module ApplicationHelper
       def sidebar
-        content_tag("div", :class #> "block") do
-          content_tag("ul", :class #> "navigation") do
+        content_tag("div", :class => "block") do
+          content_tag("ul", :class => "navigation") do
             content_tag("li", link_to("News Item 3", news_path(3)))
           end
         end
@@ -199,7 +199,7 @@ instance variable to do so.
       before_filter :hide_sidebar
       
       def hide_sidebar
-        @full_width # true
+        @full_width = true
       end
       protected :hide_sidebar
     end

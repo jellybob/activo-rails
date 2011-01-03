@@ -40,6 +40,24 @@ module ActivoRails
       })
     end
     
+    def navigation(options = {}, &block)
+      options[:class] ||= "".html_safe
+      options[:class].strip!
+      
+      menu = NavigationBuilder.new
+      yield menu if block_given?
+      
+      content_tag("div", options) do
+        content_tag("ul", "", :class => "wat-cf") do
+          menu.collect { |item|
+            content_tag("li", :class => item[:class]) do
+              link_to(item[:label], item[:href], item[:link_options])
+            end
+          }.join("").html_safe
+        end
+      end
+    end
+
     # Displays a secondary naviagtion menu
     # 
     # options - A hash of attributes to apply to the wrapping div tag
@@ -57,23 +75,11 @@ module ActivoRails
     #   </div>
     #   
     # Returns a secondary navigation block to be displayed.
-    def secondary_navigation(options = {})
-      options[:class] ||= "".html_safe
-      options[:class] << " secondary-navigation".html_safe
-      options[:class].strip!
+    def secondary_navigation(options = {}, &block)
+      options[:class] ||= ""
+      options[:class] << " secondary-navigation"
       
-      menu = NavigationBuilder.new
-      yield menu if block_given?
-      
-      content_tag("div", options) do
-        content_tag("ul", "", :class => "wat-cf") do
-          menu.collect { |item|
-            content_tag("li", :class => item[:class]) do
-              link_to(item[:label], item[:href], item[:link_options])
-            end
-          }.join("").html_safe
-        end
-      end
+      navigation(options, &block)
     end
     
     # Creates a set of buttons

@@ -32,6 +32,10 @@ describe ActivoRails::Helper do
   describe "#icon" do
     it { should respond_to(:icon) }
     
+    it "returns an empty string when called with nil" do
+      view.icon(nil).should eq("")
+    end
+    
     it "creates an image tag containing the appropriate icon when called" do
       view.should_receive(:image_tag).with("/images/icons/16x16/add.png", instance_of(Hash))
       view.icon("add")
@@ -152,7 +156,13 @@ describe ActivoRails::Helper do
     end
 
     context "when rendering the controls" do
+      def set_expectations
+        view.should_receive(:icon).once.and_return(%Q{<icon img="copy_person" />})
+      end
+
       let(:buttons) do
+        set_expectations
+        
         content = view.controls do |c|
           c.item "Copy", "/people/2/copy", :icon => "copy_person"
           c.item "Delete", "/people/2", :method => :delete
@@ -174,6 +184,10 @@ describe ActivoRails::Helper do
         items = buttons.css("div.control a")
         items[0].attribute("href").value.should eq("/people/2/copy")
         items[1].attribute("href").value.should eq("/people/2")
+      end
+
+      it "should attach an icon when requested" do
+        buttons.css("div.control a icon[img='copy_person']").should have(1).node
       end
     end
   end

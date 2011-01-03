@@ -30,6 +30,8 @@ module ActivoRails
     #   
     # Returns an image tag, ready to be displayed in a template.
     def icon(name, size = :small, options = {})
+      return "" if name.nil?
+      
       dimension = ( (size == :small) ? "16" : "32" ).html_safe
       options[:alt] ||= name.capitalize
       
@@ -171,7 +173,7 @@ module ActivoRails
           :href => path,
           :class => options[:class].strip,
           :link_options => options[:link_options],
-          :icon => options[:icon] || label.downcase.underscore
+          :icon => options[:icon]
         }
       end
     end

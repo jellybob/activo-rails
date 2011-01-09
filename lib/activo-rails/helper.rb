@@ -172,9 +172,8 @@ module ActivoRails
         options[:class] << " first" if item_list.empty?
         options[:class] << " active" if options[:active]
                 
-        options[:link_options] = {}
-        options[:link_options][:method] = options[:method] if options[:method]
-
+        options[:link_options] ||= {}
+        
         item_list << {
           :label => label,
           :href => path,

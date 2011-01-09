@@ -173,6 +173,7 @@ module ActivoRails
         options[:class] << " active" if options[:active]
                 
         options[:link_options] ||= {}
+        options[:link_options].merge!(:method => options[:method]) if options[:method]
         
         item_list << {
           :label => label,

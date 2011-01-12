@@ -1,4 +1,5 @@
 require File.expand_path("../spec_helper", __FILE__)
+require 'activo-rails/helper'
 
 describe ActivoRails::Helper::NavigationBuilder do
   let(:builder) { ActivoRails::Helper::NavigationBuilder.new } 
@@ -46,6 +47,21 @@ describe ActivoRails::Helper::NavigationBuilder do
       builder.item("New Item", "", :method => :delete)
       builder.item_list[0][:link_options].should eq({ :method => :delete })
     end
+    
+    it "sets the method on link_options as it was provided (preserves it)" do
+      builder.item("Delete", "", :link_options => {:method => :delete})
+      builder.item_list[0][:link_options].should eq({ :method => :delete })
+    end
+    
+    it "sets the method on link_options as provided through link_options and method optiosn, giving priority to the method option" do
+      builder.item("Should Post", "", :link_options => {:method => :delete}, :method => :post)
+      builder.item_list[0][:link_options].should eq({ :method => :post })
+    end
+    
+    it "sets the method on link_options if provided as " do
+      builder.item("New Item", "", :method => :delete)
+      builder.item_list[0][:link_options].should eq({ :method => :delete })
+    end
 
     it "sets the icon if provided" do
       builder.item("New Item", "", :icon => "new")
@@ -71,6 +87,7 @@ describe ActivoRails::Helper::NavigationBuilder do
       builder.item("Delete", "")
       builder.item_list[0][:active].should be_false
     end
+ 
   end
 
   it { should respond_to(:item_list) }

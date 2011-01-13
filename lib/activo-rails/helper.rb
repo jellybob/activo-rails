@@ -140,7 +140,7 @@ module ActivoRails
 
               link_to(item[:label], item[:href], item[:link_options])
             end
-          }.join("")
+          }.join("").html_safe
         end
       end
     end

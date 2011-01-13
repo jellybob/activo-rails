@@ -45,7 +45,9 @@ $red:                  #cc0000
 $light_blue:           #e6eefc
 $interactive_yellow:   #ffff88
 $yellow:               #ffee79
-
+$green:		       #9c3
+$header_fill:	       #eaeaea
+$white: 	       #fff
 
 ///////////////////////////////////////////////
 
@@ -67,24 +69,30 @@ hr
   background: $light_grey
   color: $light_grey
 
+
+// CONTAINER
+
+#container
+  min-width: 0
+
 // HEADER
 
 #header
-  background-color: $black
+  background-color: $green
   background-image: url('../../images/logo.png')
   background-repeat: no-repeat
-  background-position: 20px 20px
+  background-position: 20px 2px
 
   h1
-    padding: 15px 55px
-    font-size: 40px
+    padding: 2px 40px
+    font-size: 20px
     font-style: normal
     text-transform: normal
     letter-spacing: -1px
     line-height: 1.2em
     color: #fff
     @include text-shadow(#000, 1px, 1px, 2)
-    height: 50px
+    height: 25px
 
     a:link, a:active, a:hover, a:visited
       color: #fff
@@ -93,8 +101,7 @@ hr
 // MAIN AREA
 
 #main
-  // se for para utilizar a sidebar
-  width: 77%
+  width: 100%
   float: left
 
   .block
@@ -112,7 +119,7 @@ hr
         margin-left: 15px
         font-size: 22px
         font-style: normal
-        font-weight: bold
+        font-weight: normal
         text-transform: normal
         letter-spacing: -1px
         line-height: 1.2em
@@ -142,54 +149,49 @@ hr
   // barra de menus do topo
   ul
     li
-      float: left
-      padding-left: 15px
-      padding-right: 5px
-      margin-right: 0
+      background: lighten($green, 20%)
+      color: #eee
+      @include rounded-corner(top, left, 5px)
+      @include rounded-corner(top, right, 5px)
 
       a:link, a:visited, a:hover, a:active
-        padding: 8px 0
+        padding: 2px 10px
         text-decoration: none
         color: $black_text
 
       &.active
+        background: $light_grey
         a:link, a:visited, a:hover, a:active
-          color: $grey
+          color: $black_text
 
-  background-color: $light_grey
-  background-image: url('../../images/menubar-background.png')
-  background-repeat: repeat-x
-
-  @include rounded-corner(top, left, 9px)
-  @include rounded-corner(top, right, 9px)
-
+      &:hover
+        background: $light_grey
 
 // TOP NAVIGATION
 
 .secondary-navigation
-  background-color: #f2f1ee
-  background-image: url('../../images/boxbar-background.png')
+  background: $green
   border-bottom-width: 0px
   @include rounded-corner(top, left, 9px)
   @include rounded-corner(top, right, 9px)
 
-  li.first a, ul li.first
-    @include rounded-corner(top, left, 9px)
+  ul
+    li
+      background: lighten($green, 20%)
+      margin-right: 5px
+      @include rounded-corner(top, left, 5px)
+      @include rounded-corner(top, right, 5px)
 
-  ul li a
-    &:link, &:visited, &:hover, &:active
-      text-decoration: none
-      color: $black_text
+      a:link, a:visited, a:hover, a:active
+        padding: 2px 10px
+        text-decoration: none
+        color: $black_text
 
-  ul li.text
-    padding: 10px 15px
-    color: #818171
+      &.active
+        background: $white
 
-  ul li.active
-    background-color: #fff
-    a:hover
-      background-color: #fff
-
+      &:hover
+        background: $white
 
 // USER NAVIGATION
 
@@ -385,13 +387,15 @@ hr
 
 .table
   th
-    background: #eaeaea
+    padding: 5px
+    background: $header_fill
     color: #222
     font-weight: normal
     &.last
       width: 80px
   td
-    border-bottom: 1px solid #eaeaea
+    padding: 5px
+    border-bottom: 1px solid $header_fill
     &.last
       // coluna em que aparecem os ícones (maiores que o texto)
       padding-top: 0px
@@ -480,9 +484,9 @@ hr
     p
       margin: 8px
 
-  .error, .error-list
-    border: 1px solid #fbb
-    background-color: #fdd
+  .error, .alert, .error-list
+    border: 1px solid #a60202
+    background-color: #f22
 
   .warning
     border: 1px solid $interactive_yellow

@@ -32,26 +32,10 @@
 <body>
   <div id="container">
     <div id="header">
-      <% if respond_to? :status_menu -%>
-        <div id='status'>
-          <%= status_menu %>
-        </div>
-      <%- end %>
+      <%= content_tag("div", status_menu, :id => "status") if respond_to? :status_menu %>
       <h1><a href="index.html"></a></h1>
-      <% if respond_to? :user_navigation -%>
-        <div id="user-navigation">
-          <ul class="wat-cf">
-            <%= user_navigation %>
-          </ul>
-        </div>
-      <%- end %>
-      <% if respond_to? :main_navigation -%>
-        <div id="main-navigation">
-          <ul class="wat-cf">
-            <%= main_navigation %>
-          </ul>
-        </div>
-      <%- end %>
+      <%= navigation(:id => "user-navigation") { |n| user_navigation(n) } if respond_to?(:user_navigation) %>
+      <%= navigation(:id => "main-navigation") { |n| main_navigation(n) } if respond_to?(:main_navigation) %>
     </div>
     <div id="wrapper" class="wat-cf">
       <div id="<%= @full_width ? 'full-main' : 'main' %>">
@@ -62,6 +46,11 @@
         </div>
         <%= yield %>
       </div>
+      <% if respond_to? :sidebar %>
+        <div id="sidebar">
+          <%= sidebar %>
+        </div>
+      <% end %>
     </div>
   </div>
 </body>

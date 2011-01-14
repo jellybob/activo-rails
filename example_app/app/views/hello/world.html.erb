@@ -2,17 +2,21 @@
 
 <div class="block">
   <%= secondary_navigation do |n|
-    n.item "Another Page", root_path
-    n.item "Page 4", root_path, :active => true
+    n.item "Home", root_path, :active => true
+    n.item "Details", root_path, :active => true
   end %>
   <div class="content">
     <%= controls do |c|
       c.item "New Item", root_path, :icon => "add"
     end %>
+    <h2>Details</h2>
+    <div class="inner">
+      <p>Hello, world!</p>
+      <p>This is a block of content.</p>
+    </div>
   </div>
   <%= breadcrumbs do |b|
     b.item "Home", root_path
-    b.item "Somewhere else", root_path
-    b.item "Hello, world!", root_path, :active => true
+    b.item "Details", root_path, :active => true 
   end %>
 </div>

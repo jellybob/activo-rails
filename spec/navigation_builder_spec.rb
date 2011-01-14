@@ -51,10 +51,25 @@ describe ActivoRails::Helper::NavigationBuilder do
       builder.item("New Item", "", :icon => "new")
       builder.item_list[0][:icon].should eq("new")
     end
-
-    it "defaults the icon to the title if not provided" do
+    
+    it "does not include an icon if not provided" do
       builder.item("Delete", "")
-      builder.item_list[0][:icon].should eq("delete")
+      builder.item_list[0][:icon].should be_nil
+    end
+
+    it "sets the active option to true if provided" do
+      builder.item("Delete", "", :active => true)
+      builder.item_list[0][:active].should be_true
+    end
+
+    it "sets the active option to false if provided" do
+      builder.item("Delete", "", :active => false)
+      builder.item_list[0][:active].should be_false
+    end
+
+    it "sets the active option to false if left empty" do
+      builder.item("Delete", "")
+      builder.item_list[0][:active].should be_false
     end
   end
 

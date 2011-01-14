@@ -32,6 +32,10 @@ describe ActivoRails::Helper do
   describe "#icon" do
     it { should respond_to(:icon) }
     
+    it "returns an empty string when called with nil" do
+      view.icon(nil).should eq("")
+    end
+    
     it "creates an image tag containing the appropriate icon when called" do
       view.should_receive(:image_tag).with("/images/icons/16x16/add.png", instance_of(Hash))
       view.icon("add")
@@ -152,7 +156,13 @@ describe ActivoRails::Helper do
     end
 
     context "when rendering the controls" do
+      def set_expectations
+        view.should_receive(:icon).once.and_return(%Q{<icon img="copy_person" />})
+      end
+
       let(:buttons) do
+        set_expectations
+        
         content = view.controls do |c|
           c.item "Copy", "/people/2/copy", :icon => "copy_person"
           c.item "Delete", "/people/2", :method => :delete
@@ -174,6 +184,10 @@ describe ActivoRails::Helper do
         items = buttons.css("div.control a")
         items[0].attribute("href").value.should eq("/people/2/copy")
         items[1].attribute("href").value.should eq("/people/2")
+      end
+
+      it "should attach an icon when requested" do
+        buttons.css("div.control a icon[img='copy_person']").should have(1).node
       end
     end
   end
@@ -219,28 +233,45 @@ describe ActivoRails::Helper do
         breadcrumbs.css("ul li").should have(3).nodes
       end
 
-      it "should render each item as a link" do
-        breadcrumbs.css("ul li a").should have(3).nodes
+      it "should render each inactive item as a link" do
+        breadcrumbs.css("ul li a").should have(2).nodes
       end
       
-      describe "the breadcrumbs" do
+      describe "the list items" do
+        let(:items) { breadcrumbs.css("ul li") }
+
+        it "should set the class of first on the first item" do
+          items[0].attribute("class").value.should eq("first")
+        end
+
+        it "should set the class of active on the active item" do
+          items[2].attribute("class").value.should eq("active")
+        end
+        
+        it "should not link an active item" do
+          items[2].css("a").should be_empty
+        end
+        
+        it "should place the content of the active item directly in the list item" do
+          items[2].content.should eq("Awesome New Things")
+        end
+
+        it "should set specified classes when requested" do
+          items[1].attribute("class").value.should eq("news")
+        end
+      end
+
+      describe "the links" do
         let(:items) { breadcrumbs.css("ul li a") }
         
         it "should be displayed in the correct order" do
           items[0].content.should eq("Home")
           items[1].content.should eq("News")
-          items[2].content.should eq("Awesome New Things")
         end
 
         it "should link to the correct locations" do
           items[0].attribute("href").value.should eq("/")
           items[1].attribute("href").value.should eq("/news/")
-          items[2].attribute("href").value.should eq("/news/awesome-new-things")
-        end
-
-        it "should apply link options" do
-          items[1].attribute("class").value.should eq("news")
-          items[2].attribute("class").value.should eq("active")
         end
       end
     end

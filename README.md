@@ -156,7 +156,7 @@ will be passed a NavigationBuilder instance which can be filled with items.
     module ApplicationHelper
       def main_navigation(menu)
         menu.item "Home", root_path
-        menu.iten "News", news_path, :active => true
+        menu.item "News", news_path, :active => true
       end
     end
 

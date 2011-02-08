@@ -223,6 +223,7 @@ send me a pull request when your feature is ready.
 For the original (and beautiful) Activo web app theme: David Francisco (http://github.com/dmfrancisco/activo)
 Icons: FatCow (http://www.fatcow.com/free-icons)
 Fixing jQuery UI image paths: Mike Park (http://github.com/mikepinde/)
+Fixing link options, and breadcrumbs: Nirmit Patel (http://github.com/NeMO84/)
 
 And thanks to the people brave enough to use this before it was released, or even had a readme, for provoking me into
 actually releasing the damn thing.

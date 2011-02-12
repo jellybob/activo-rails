@@ -26,7 +26,7 @@
   
   <%= csrf_meta_tag %>
   
-  <%= head %>
+  <%= head if respond_to? :head %>
   <%= yield :head %>
 </head>
 

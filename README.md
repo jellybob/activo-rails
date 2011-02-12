@@ -138,6 +138,29 @@ To add a set of buttons to the top of a block, use the `controls` helper.
 Valid options are the same as for tabs, with an additional `icon` option, which will be passed
 to the `icon` helper.
 
+## Adding to the header ##
+
+To add content to the header, you have two choices, depending on how often you need to do so.
+
+### yield :head ###
+
+If you just need to add something on a single page, provide some content for the head block:
+
+    <% content_for :head do %>
+      <script>
+        console.log('This is in the header now.')
+      </script>
+    <% end %>
+
+### def head ###
+
+If you're going to want the content more regularly, you can create a helper called head, which 
+will be called at the appropriate place:
+
+    def head
+      content_tag("script", "console.log('This is in the header now.')")
+    end
+
 ## Customising the Layout ##
 
 You probably want to add a few menus of your own, and maybe a sidebar as well. That's done by

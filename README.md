@@ -247,6 +247,14 @@ This is currently a very young gem. I'm using it in a couple of projects quite h
 use some smoothing out of the edges, and more view helpers. If you want to contribute, fork this repository, and
 send me a pull request when your feature is ready.
 
+Any contributions should come with accompanying tests, examples of which can be found in the spec/ directory.
+
+To test that the right content is being generated make modifications to the application in spec/dummy/ and then
+add a new integration test for it in spec/integration/. I know not everything is covered by integration tests yet.
+That's no excuse not to write them for new features ;)
+
+The test suite can be run by using `rake spec`.
+
 ## Credits ##
 
 For the original (and beautiful) Activo web app theme: David Francisco (http://github.com/dmfrancisco/activo)

@@ -1,8 +1,8 @@
 require File.expand_path("../spec_helper", __FILE__)
-require 'activo-rails/helper'
+require 'activo/rails/helper'
 
-describe ActivoRails::Helper::NavigationBuilder do
-  let(:builder) { ActivoRails::Helper::NavigationBuilder.new } 
+describe Activo::Rails::Helper::NavigationBuilder do
+  let(:builder) { Activo::Rails::Helper::NavigationBuilder.new } 
   subject { builder }
 
   it { should respond_to(:item) }

@@ -1,0 +1,1 @@
+require 'activo/rails/engine'

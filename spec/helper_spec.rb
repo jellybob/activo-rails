@@ -1,5 +1,5 @@
 require File.expand_path('../spec_helper', __FILE__)
-require 'activo-rails/helper'
+require 'activo/rails/helper'
 require 'nokogiri'
 require 'active_support/dependencies/autoload'
 require 'action_view'
@@ -7,11 +7,11 @@ require 'action_view/base'
 require 'action_view/template/handlers/erb'
 
 class View < ActionView::Base
-  include ActivoRails::Helper
+  include Activo::Rails::Helper
   include ActionView::Helpers::TagHelper
 end
 
-describe ActivoRails::Helper do
+describe Activo::Rails::Helper do
   let(:view) { View.new }
   subject { view }
   
@@ -85,7 +85,7 @@ describe ActivoRails::Helper do
 
     it "yields an instance of NavigationBuilder" do
       view.secondary_navigation do |nav|
-        nav.should be_instance_of(ActivoRails::Helper::NavigationBuilder)
+        nav.should be_instance_of(Activo::Rails::Helper::NavigationBuilder)
       end
     end
   
@@ -151,7 +151,7 @@ describe ActivoRails::Helper do
     
     it "should yield a navigation builder" do
       view.controls do |c|
-        c.should be_instance_of(ActivoRails::Helper::NavigationBuilder)
+        c.should be_instance_of(Activo::Rails::Helper::NavigationBuilder)
       end
     end
 
@@ -211,7 +211,7 @@ describe ActivoRails::Helper do
 
     it "should yield a navigation builder" do
       view.breadcrumbs do |b|
-        b.should be_instance_of(ActivoRails::Helper::NavigationBuilder)
+        b.should be_instance_of(Activo::Rails::Helper::NavigationBuilder)
       end
     end
 

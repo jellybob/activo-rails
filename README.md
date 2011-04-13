@@ -16,8 +16,14 @@ To install the theme add the following line to your application's Gemfile:
 
     gem "activo-rails"
 
-And then run `bundle install`. If you have an application layout then you'll need to remove
-or rename it, since your application's assets will always take priority.
+Update your bundle, and then in your application controller set the layout:
+
+    class ApplicationController < ActionController::Base
+      layout "activo"
+    end
+
+If you only want to use Activo in some controllers, then you should only set the layout in those
+controllers, and the rest of the application will continue to use your default layout.
 
 ## Hello, World! ##
 
@@ -245,7 +251,9 @@ send me a pull request when your feature is ready.
 
 For the original (and beautiful) Activo web app theme: David Francisco (http://github.com/dmfrancisco/activo)
 Icons: FatCow (http://www.fatcow.com/free-icons)
+
 Fixing jQuery UI image paths: Mike Park (http://github.com/mikepinde/)
+
 Fixing link options, and breadcrumbs: Nirmit Patel (http://github.com/NeMO84/)
 
 And thanks to the people brave enough to use this before it was released, or even had a readme, for provoking me into

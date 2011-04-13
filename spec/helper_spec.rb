@@ -79,59 +79,9 @@ describe Activo::Rails::Helper do
   describe "creating a control set" do
     it { should respond_to(:controls) }
 
-    it "should create the control wrapper" do
-      content = view.controls
-
-      doc = Nokogiri::HTML(content)
-      doc.css("div.control").should_not be_empty
-    end
-
-    it "should merge any provided options for the wrapper" do
-      content = view.controls(:id => "foo")
-      
-      doc = Nokogiri::HTML(content)
-      doc.css("div.control#foo").should_not be_empty
-    end
-    
     it "should yield a navigation builder" do
       view.controls do |c|
         c.should be_instance_of(Activo::Rails::Helper::NavigationBuilder)
-      end
-    end
-
-    context "when rendering the controls" do
-      def set_expectations
-        view.should_receive(:icon).once.and_return(%Q{<icon img="copy_person" />})
-      end
-
-      let(:buttons) do
-        set_expectations
-        
-        content = view.controls do |c|
-          c.item "Copy", "/people/2/copy", :icon => "copy_person"
-          c.item "Delete", "/people/2", :method => :delete
-        end
-        Nokogiri::HTML(content)
-      end
-
-      it "should display the correct number of items" do
-        buttons.css("div.control a").should have(2).nodes
-      end
-
-      it "should display each item in order" do
-        items = buttons.css("div.control a")
-        items[0].content.should eq("Copy")
-        items[1].content.should eq("Delete")
-      end
-
-      it "should link each item correctly" do
-        items = buttons.css("div.control a")
-        items[0].attribute("href").value.should eq("/people/2/copy")
-        items[1].attribute("href").value.should eq("/people/2")
-      end
-
-      it "should attach an icon when requested" do
-        buttons.css("div.control a icon[img='copy_person']").should have(1).node
       end
     end
   end
@@ -139,84 +89,9 @@ describe Activo::Rails::Helper do
   describe "#breadcrumbs" do
     it { should respond_to(:breadcrumbs) } 
 
-    it "should create the breadcrumb wrapper" do
-      content = view.breadcrumbs
-      
-      doc = Nokogiri::HTML(content)
-      doc.css("div.breadcrumb").should_not be_empty
-    end
-
-    it "should merge any options with the wrapper div" do
-      content = view.breadcrumbs(:id => "foo")
-
-      doc = Nokogiri::HTML(content)
-      doc.css("div#foo.breadcrumb").should_not be_empty
-    end
-
     it "should yield a navigation builder" do
       view.breadcrumbs do |b|
         b.should be_instance_of(Activo::Rails::Helper::NavigationBuilder)
-      end
-    end
-
-    context "when provided with some breadcrumbs" do
-      let(:breadcrumbs) do
-        content = view.breadcrumbs do |b|
-          b.item "Home", "/"
-          b.item "News", "/news/", :class => "news"
-          b.item "Awesome New Things", "/news/awesome-new-things", :active => true
-        end
-        Nokogiri::HTML(content)
-      end
-      
-      it "should wrap the items in an unordered list" do
-        breadcrumbs.css("div ul").should_not be_empty
-      end
-
-      it "should display the correct number of items" do
-        breadcrumbs.css("ul li").should have(3).nodes
-      end
-
-      it "should render each inactive item as a link" do
-        breadcrumbs.css("ul li a").should have(2).nodes
-      end
-      
-      describe "the list items" do
-        let(:items) { breadcrumbs.css("ul li") }
-
-        it "should set the class of first on the first item" do
-          items[0].attribute("class").value.should eq("first")
-        end
-
-        it "should set the class of active on the active item" do
-          items[2].attribute("class").value.should eq("active")
-        end
-        
-        it "should not link an active item" do
-          items[2].css("a").should be_empty
-        end
-        
-        it "should place the content of the active item directly in the list item" do
-          items[2].content.should eq("Awesome New Things")
-        end
-
-        it "should set specified classes when requested" do
-          items[1].attribute("class").value.should eq("news")
-        end
-      end
-
-      describe "the links" do
-        let(:items) { breadcrumbs.css("ul li a") }
-        
-        it "should be displayed in the correct order" do
-          items[0].content.should eq("Home")
-          items[1].content.should eq("News")
-        end
-
-        it "should link to the correct locations" do
-          items[0].attribute("href").value.should eq("/")
-          items[1].attribute("href").value.should eq("/news/")
-        end
       end
     end
   end

@@ -120,7 +120,7 @@ They're added using the `breadcrumbs` helper.
       end %> 
     </div>
 
-Valid options are teh same as for tabs.
+Valid options are the same as for tabs.
 
 ### Controls ###
 

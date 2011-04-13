@@ -34,7 +34,7 @@ module Activo
         return "" if name.nil?
         
         dimension = ( (size == :small) ? "16" : "32" ).html_safe
-        options[:alt] ||= name.capitalize
+        options[:alt] ||= name.capitalize.gsub("_", " ")
         
         image_tag("/images/icons/#{dimension}x#{dimension}/#{name}.png", {
           :alt => options[:alt]

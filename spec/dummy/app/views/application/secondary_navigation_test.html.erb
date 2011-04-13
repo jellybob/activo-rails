@@ -1,0 +1,13 @@
+<section id="without_id">
+  <%= secondary_navigation do |nav|
+    nav.item "Item 1", "/", :class => "foo"
+    nav.item "Item 2", "/item2", :method => :delete
+  end %>
+</section>
+
+<section id="with_id">
+  <%= secondary_navigation(:id => "nav") do |nav|
+    nav.item "Item 1", "/", :class => "foo"
+    nav.item "Item 2", "/item2", :method => :delete
+  end %>
+<section>

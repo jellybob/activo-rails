@@ -69,65 +69,9 @@ describe Activo::Rails::Helper do
   describe "#secondary-navigation" do
     it { should respond_to(:secondary_navigation) }
     
-    it "builds the wrapper around the menu" do
-      content = view.secondary_navigation
-    
-      doc = Nokogiri::HTML(content)
-      doc.css("div.secondary-navigation ul.wat-cf").should_not be_empty
-    end
-
-    it "applies provided options to the wrapper div" do
-      content = view.secondary_navigation(:id => "nav")
-
-      doc = Nokogiri::HTML(content)
-      doc.css("div.secondary-navigation#nav").should_not be_empty
-    end
-
     it "yields an instance of NavigationBuilder" do
       view.secondary_navigation do |nav|
         nav.should be_instance_of(Activo::Rails::Helper::NavigationBuilder)
-      end
-    end
-  
-    context "when rendering menu items" do
-      let(:menu) do
-        content = view.secondary_navigation do |nav|
-          nav.item "Item 1", "/", :class => "foo"
-          nav.item "Item 2", "/item2", :method => :delete
-        end
-
-        Nokogiri::HTML(content)
-      end
-
-      it "displays the correct number of items" do
-        menu.css("div.secondary-navigation ul li").should have(2).nodes
-      end
-
-      it "renders a link for each item" do
-        menu.css("div.secondary-navigation ul li a").should have(2).nodes
-      end
-      
-      it "displays Item 1 in the first position" do
-        menu.css("div.secondary-navigation ul li:first-child a")[0].content.should eq("Item 1")
-      end
-
-      it "displays Item 2 in the last position" do
-        menu.css("div.secondary-navigation ul li:last-child a")[0].content.should eq("Item 2")
-      end
-      
-      it "sets the correct path for links" do
-        href = menu.css("div.secondary-navigation ul li:last-child a")[0].attribute("href")
-        href.value.should eq("/item2")
-      end
-      
-      it "applies any classes to the node" do
-        classes = menu.css("div.secondary-navigation ul li:first-child")[0].attribute("class")
-        classes.value.split(" ").should include("foo")
-      end
-
-      it "passes link options to the link" do
-        method = menu.css("div.secondary-navigation ul li:last-child a")[0].attribute("data-method")
-        method.value.should eq("delete")
       end
     end
   end

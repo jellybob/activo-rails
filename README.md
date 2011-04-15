@@ -271,7 +271,7 @@ actually releasing the damn thing.
 
 All original components of activo-rails are licensed under the MIT license:
 
-Copyright (c) 2011, Jon Wood
+Copyright (c) 2011, Blank Pad Development
 
 That doesn't cover the Activo theme itself, the FatCow icon set, or jQuery, which remain under their original licenses 
 and the property of their original authors.

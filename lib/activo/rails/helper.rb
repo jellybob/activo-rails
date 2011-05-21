@@ -25,9 +25,9 @@ module Activo
       # 
       # Example:
       #   icon("add")
-      #   # => image_tag("/images/icons/16x16/add.png", :alt => "Add")
+      #   # => image_tag("/assets/activo-rails/icons/16x16/add.png", :alt => "Add")
       #   icon("new_item", :large)
-      #   # => image_tag("/images/icons/32x32/new_item.png, :alt => "New Item")
+      #   # => image_tag("/assets/activo-rails/icons/32x32/new_item.png, :alt => "New Item")
       #   
       # Returns an image tag, ready to be displayed in a template.
       def icon(name, size = :small, options = {})
@@ -36,7 +36,7 @@ module Activo
         dimension = ( (size == :small) ? "16" : "32" ).html_safe
         options[:alt] ||= name.capitalize.gsub("_", " ")
         
-        image_tag("/images/icons/#{dimension}x#{dimension}/#{name}.png", {
+        image_tag("/assets/activo-rails/icons/#{dimension}x#{dimension}/#{name}.png", {
           :alt => options[:alt]
         })
       end

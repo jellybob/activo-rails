@@ -5,6 +5,7 @@
 // the compiled file.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 
 // Place your application-specific JavaScript functions and classes here

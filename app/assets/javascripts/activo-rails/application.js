@@ -25,10 +25,3 @@ jQuery(function( $ )
 	   }
 	});
 });
-
-// add csrf token to all ajax calls
-$("body").bind("ajaxSend", function(elm, xhr, s){
-   if (s.type == "POST") {
-      xhr.setRequestHeader('X-CSRF-Token', csrf_token);
-   }
-});

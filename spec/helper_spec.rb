@@ -37,17 +37,17 @@ describe Activo::Rails::Helper do
     end
     
     it "creates an image tag containing the appropriate icon when called" do
-      view.should_receive(:image_tag).with("/images/icons/16x16/add.png", instance_of(Hash))
+      view.should_receive(:image_tag).with("/assets/activo-rails/icons/16x16/add.png", instance_of(Hash))
       view.icon("add")
     end
 
     it "creates the icon at 16x16 when size is small" do
-      view.should_receive(:image_tag).with("/images/icons/16x16/add.png", instance_of(Hash))
+      view.should_receive(:image_tag).with("/assets/activo-rails/icons/16x16/add.png", instance_of(Hash))
       view.icon("add", :small)
     end
 
     it "creates the icon at 32x32 when size is small" do
-      view.should_receive(:image_tag).with("/images/icons/32x32/add.png", instance_of(Hash))
+      view.should_receive(:image_tag).with("/assets/activo-rails/icons/32x32/add.png", instance_of(Hash))
       view.icon("add", :large)
     end
 

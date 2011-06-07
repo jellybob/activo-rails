@@ -86,7 +86,7 @@ form.formtastic fieldset > ol > li.file input {
 
 form.formtastic fieldset > ol > li.datepicker input {
   /* icone do datepicker */
-  background: url('../../images/icons/calendar.png') no-repeat right;
+  background: url('/assets/activo-rails/icons/calendar.png') no-repeat right;
 }
 
 form.formtastic fieldset > ol > li.string input:hover,
@@ -101,7 +101,7 @@ form.formtastic fieldset > ol > li.datepicker input:hover {
 
 form.formtastic fieldset > ol > li.datepicker input:hover {
   /* icone do datepicker quando rato está por cima */
-  background: url('../../images/icons/calendar-hover.png') no-repeat right;
+  background: url('/assets/activo-rails/icons/calendar-hover.png') no-repeat right;
 }
 
 form.formtastic fieldset > ol > li.string input:focus,

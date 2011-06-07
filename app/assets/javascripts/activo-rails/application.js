@@ -8,8 +8,8 @@
 //= require jquery-ui
 //= require jquery_ujs
 // require all activo javascripts
-//= require jquery.scrollTo
-//= require jquery.localscroll
-//= require jquery.tipsy
-//= require datepicker
-//= require scroll_effects
+//= require ./jquery.scrollTo
+//= require ./jquery.localscroll
+//= require ./jquery.tipsy
+//= require ./datepicker
+//= require ./scroll_effects

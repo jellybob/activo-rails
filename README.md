@@ -10,6 +10,21 @@ and build it yourself everytime.
 There are also a few view helpers available to simplify the creation of common UI elements
 such as button lists, breadcrumbs, and menus.
 
+## !Experimental Rails 3.1 Branch! ##
+This branch is experimental and requires rails 3.1 (Release candiate 4 at the moment).
+To deploy it in production (make "rake assets:precompile" work) you have to modify the asset pipeline configuration as follows:
+
+  # Enable the asset pipeline
+  config.assets.enabled = true
+
+  config.assets.precompile = [ 
+    /ie\.css$/,
+    /\w+\.(?!js|css).+/,
+    /application\.(js|css)$/
+  ]
+  
+This will make rails compile the application.js/.css files which are required by activo rails.
+
 ## Installing ##
 
 To install the theme add the following line to your application's Gemfile:
@@ -24,6 +39,7 @@ Update your bundle, and then in your application controller set the layout:
 
 If you only want to use Activo in some controllers, then you should only set the layout in those
 controllers, and the rest of the application will continue to use your default layout.
+
 
 ## Hello, World! ##
 

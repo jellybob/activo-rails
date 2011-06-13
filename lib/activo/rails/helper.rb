@@ -36,13 +36,13 @@ module Activo
         dimension = ( (size == :small) ? "16" : "32" ).html_safe
         options[:alt] ||= name.capitalize.gsub("_", " ")
         
-        image_tag("/assets/activo-rails/icons/#{dimension}x#{dimension}/#{name}.png", {
+        image_tag(asset_path("activo-rails/icons/#{dimension}x#{dimension}/#{name}.png"), {
           :alt => options[:alt]
         })
       end
       
       def navigation(options = {}, &block)
-        options[:class] ||= "".html_safe
+        options[:class] ||= ""
         options[:class].strip!
         
         menu = NavigationBuilder.new
@@ -99,8 +99,8 @@ module Activo
       #   
       # Returns a set of controls to be displayed.
       def controls(options = {})
-        options[:class] ||= "".html_safe
-        options[:class] << " control".html_safe
+        options[:class] ||= ""
+        options[:class] << " control"
         options[:class].strip!
         
         items = NavigationBuilder.new
@@ -136,8 +136,8 @@ module Activo
         items = NavigationBuilder.new
         yield items if block_given?
         
-        options[:class] ||= "".html_safe
-        options[:class] << " breadcrumb".html_safe
+        options[:class] ||= ""
+        options[:class] << " breadcrumb"
         options[:class].strip!
         
         content_tag("div", options) do

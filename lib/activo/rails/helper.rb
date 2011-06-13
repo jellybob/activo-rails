@@ -42,8 +42,8 @@ module Activo
       end
       
       def navigation(options = {}, &block)
-        options[:class] ||= "".html_safe
-        options[:class].strip!
+        options[:class] ||= ""
+        options[:class] = options[:class].strip.html_safe
         
         menu = NavigationBuilder.new
         yield menu if block_given?
@@ -99,9 +99,9 @@ module Activo
       #   
       # Returns a set of controls to be displayed.
       def controls(options = {})
-        options[:class] ||= "".html_safe
-        options[:class] << " control".html_safe
-        options[:class].strip!
+        options[:class] ||= ""
+        options[:class] << " control"
+        options[:class] = options[:class].strip.html_safe
         
         items = NavigationBuilder.new
         yield items if block_given?
@@ -136,9 +136,9 @@ module Activo
         items = NavigationBuilder.new
         yield items if block_given?
         
-        options[:class] ||= "".html_safe
-        options[:class] << " breadcrumb".html_safe
-        options[:class].strip!
+        options[:class] ||= ""
+        options[:class] << " breadcrumb"
+        options[:class] = options[:class].strip.html_safe
         
         content_tag("div", options) do
           content_tag("ul") do

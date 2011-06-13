@@ -31,15 +31,7 @@
             <%= content_tag("div", "<p>#{flash[f]}</p>".html_safe, :class => "message #{f}") unless flash[f].nil? %>
           <% end %>
         </div>
-        <div class="block">
-          <div class="content">
-            <%= yield :controls %>
-            
-            <div class="inner">
-              <%= yield %>
-            </div>
-          </div>
-        </div>
+        <%= yield %>
       </div>
       <% if respond_to? :sidebar %>
         <div id="sidebar">

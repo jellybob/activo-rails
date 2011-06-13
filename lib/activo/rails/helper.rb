@@ -1,6 +1,27 @@
 module Activo
   module Rails
     module Helper
+      # Adds a content box with #controls, a headline and other features
+      # 
+      # You can use box.controls to add controls to the box - see readme
+      # 
+      #
+      # == options: ==
+      # * :headline -- a headline for the box. represented as h2 tag
+      #
+      def content_box(options = {}, &block)
+        box_buffer = BoxBuffer.new(self)
+        box_content = capture(box_buffer, &block)
+        
+        content_tag(:div, :class => 'block') do
+          out = (box_buffer.buffers[:controls] || '').html_safe
+          out << content_tag(:div, :class => 'content') do
+            out = content_tag(:h2, options[:headline]) if options[:headline]
+            out << content_tag(:div, box_content, :class => 'inner')
+          end
+        end
+      end
+      
       # Get or set the page title
       # 
       # title - The title to set. (optional)
@@ -184,6 +205,24 @@ module Activo
             :icon => options[:icon],
             :active => !!options[:active]
           }
+        end
+      end
+
+      # This class acts as buffer for content_box
+      #
+      class BoxBuffer
+        attr_reader :buffers
+        
+        def initialize(parent)
+          @parent = parent
+          @buffers = { }
+        end
+        
+        # Adds a navigation to this #content_box
+        #
+        def controls(options = {}, &block)
+          buffers[:controls] = @parent.controls(options, &block)
+          ''
         end
       end
     end

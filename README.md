@@ -46,15 +46,10 @@ controllers, and the rest of the application will continue to use your default l
 A basic view, with a single content block, and a page title would look something like this.
 
     <% page_title "Hello, world!" %>
-
-    <div class="block">
-      <div class="content">
-        <h2>Hello, World!</h2>
-        <div class="inner">
-          <p>This is a basic Activo template.</p>
-        </div>
-      </div>
-    </div>
+    
+    <%= content_box :headline => 'Hello, World!' do %>
+      <p>This is a basic Activo template.</p>
+    <% end %>
 
 Unfortunatly there's a bit of divitis involved in using Activo. I'd like to reduce that with
 some more helpers, but I'm not entirely sure how to do so cleanly at the moment. It's probably
@@ -90,25 +85,20 @@ included in the image tag. Further options will probably be supported in the fut
 
 ### Navigation Tabs ####
 
-The `secondary_navigation` helper is used to add some tabs to the top of a content block.
+The `navigation` helper is used to add some tabs to the top of a content box.
     
     <% page_title "About Us" %>
 
-    <div class="block">
-      <%= secondary_navigation do |n|
+    <%= content_box :headline => 'About Us' do |box| %>
+      <%= box.navigation do |n|
         n.item "The Company", about_path("company"), :active => true
         n.item "Our Offices", about_path("offices")
         n.item "Jobs", about_path("jobs"), :class => "highlighted"
       end %>
-      <div class="content">
-        <h2>About Us</h2>
-        <div class="inner">
-          <p>We're an amazing company! We do things!</p>
-          <p>To find out more, click the tabs above.</p>
-        </div>
-      </div>
-    </div>
-
+      <p>We're an amazing company! We do things!</p>
+      <p>To find out more, click the tabs above.</p>
+    <% end %>
+    
 Each item can be passed a hash of options. Valid options are:
 
   active (boolean): If set to true, the tab will be highlighted as the current tab.
@@ -122,40 +112,31 @@ They're added using the `breadcrumbs` helper.
 
     <% page_title "News Item 3" %>
 
-    <div class="block">
-      <div class="content">
-        <h2>News Item 3</h2>
-        <div class="inner">
-          <p>We've got some new news here. Read all about it!</p>
-        </div>
-      </div>
-      <%= breadcrumbs do |b|
+    <%= content_box :headline => 'News Item 3' do |box| %>
+      <%= box.breadcrumbs do |b|
         b.item "Home", root_path
         b.item "News", news_path
         b.item "News Item 3", news_path(3), :active => true
-      end %> 
-    </div>
-
+      end %>
+      
+      <p>We've got some new news here. Read all about it!</p>
+    <% end %>
+    
 Valid options are the same as for tabs.
 
 ### Controls ###
 
-To add a set of buttons to the top of a block, use the `controls` helper.
+To add a set of buttons to the top of a content_box_, use the `controls` helper.
 
     <% page_title "News Item 3 (Admin Mode)" %>
 
-    <div class="block">
-      <div class="content">
-        <%= controls do |c|
-          c.item "Delete", news_path(3), :link_options => { :method => :delete, :confirm => "Really delete News Item 3?" }, :icon => "delete"
-          c.item "Edit", edit_news_path(3), :icon => "edit"
-        end %>
-        <h2>News Item 3</h2>
-        <div class="inner">
-          <p>We've got some new news here. Read all about it!</p>
-        </div>
-      </div>
-    </div>
+    <%= content_box :headline => 'New Item 3' do |box| %>
+      <%= box.controls do |c|
+        c.item "Delete", news_path(3), :link_options => { :method => :delete, :confirm => "Really delete News Item 3?" }, :icon => "delete"
+        c.item "Edit", edit_news_path(3), :icon => "edit"
+      end %>
+      <p>We've got some new news here. Read all about it!</p>
+    <% end %>
 
 Valid options are the same as for tabs, with an additional `icon` option, which will be passed
 to the `icon` helper.

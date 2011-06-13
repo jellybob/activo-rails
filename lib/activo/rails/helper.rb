@@ -14,11 +14,12 @@ module Activo
         box_content = capture(box_buffer, &block)
         
         content_tag(:div, :class => 'block') do
-          out = (box_buffer.buffers[:controls] || '').html_safe
-          out << content_tag(:div, :class => 'content') do
-            out = content_tag(:h2, options[:headline]) if options[:headline]
-            out << content_tag(:div, box_content, :class => 'inner')
+          block_out = box_buffer.buffers[:block_header].html_safe
+          block_out << content_tag(:div, :class => 'content') do
+            content_out = content_tag(:h2, options[:headline]) if options[:headline]
+            content_out << content_tag(:div, box_content, :class => 'inner')
           end
+          block_out << box_buffer.buffers[:block_footer].html_safe
         end
       end
       
@@ -215,13 +216,27 @@ module Activo
         
         def initialize(parent)
           @parent = parent
-          @buffers = { }
+          @buffers = { :block_header => '', :block_footer => '' }
         end
         
-        # Adds a navigation to this #content_box
+        # Adds controls to this #content_box
         #
         def controls(options = {}, &block)
-          buffers[:controls] = @parent.controls(options, &block)
+          buffers[:block_header] << @parent.controls(options, &block)
+          ''
+        end
+
+        # Adds a secondary navigation to this #content_box
+        #
+        def navigation(options = {}, &block)
+          buffers[:block_header] << @parent.secondary_navigation(options, &block)
+          ''
+        end
+
+        # Adds a breadcrumb navigation to this #content_box
+        #
+        def breadcrumbs(options = {}, &block)
+          buffers[:block_footer] << @parent.breadcrumbs(options, &block)
           ''
         end
       end

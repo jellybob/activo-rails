@@ -1,15 +1,10 @@
 <% page_title "Breadcrumbs" %>
 
-<div class="block">
-  <div class="content">
-    <h2>Some Stuff</h2>
-    <div class="inner">
-      <p>This is some stuff.</p>
-    </div>
-    <%= breadcrumbs :id => "foo" do |b|
-      b.item "Home", "/"
-      b.item "News", "/news", :class => "news"
-      b.item "News Item 3", "/news/3", :active => true
-    end %>
-  </div>
-</div>
+<%= content_box :headline => 'Some Stuff' do |box| %>
+  <%= box.breadcrumbs :id => "foo" do |b|
+    b.item "Home", "/"
+    b.item "News", "/news", :class => "news"
+    b.item "News Item 3", "/news/3", :active => true
+  end %>
+  <p>This is some stuff.</p>
+<% end %>

@@ -1,13 +1,7 @@
-<div class="block">
-  <div class="content">
-    <%= controls :id => "foo" do |c|
-      c.item "Copy", "/people/2/copy", :icon => "copy_person"
-      c.item "Delete", "/people/2", :method => :delete
-    end %>
-
-    <h2>Example Controls</h2>
-    <div class="inner">
-      <p>This is an example.</p>
-    </div>
-  </div>
-</div>
+<%= content_box :headline => 'Example Controls' do |box| %>
+  <%= box.controls :id => "foo" do |c|
+    c.item "Copy", "/people/2/copy", :icon => "copy_person"
+    c.item "Delete", "/people/2", :method => :delete
+  end %>
+  <p>This is an example.</p>
+<% end %>

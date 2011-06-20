@@ -3,3 +3,5 @@ pkg/*
 .bundle
 Gemfile.lock
 spec/dummy/log/*
+activo
+spec/dummy/.sass-cache

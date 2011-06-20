@@ -1,11 +1,9 @@
-/**
-* Require all Stylesheets
-* 
-*= require "./jquery-ui"
-*= require "./base"
-*= require "./jquery.tipsy"
-*= require "./activo/activo"
-*= require "./activo-attrtastic/attrtastic_changes"
-*= require "./activo-formtastic/formtastic"
-*= require "./activo-formtastic/formtastic_changes"
-*/
+#=require ./base
+#=require ./jquery-ui
+#=require ./formtastic
+#=require ./jquery.tipsy
+#=require ./uniform.default
+#=require ./themes/activo/fonts
+#=require ./themes/activo/formtastic_changes
+#=require ./themes/activo/attrtastic_changes
+#=require ./themes/activo/style

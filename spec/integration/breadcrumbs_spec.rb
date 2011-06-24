@@ -1,8 +1,6 @@
 require 'spec_helper'
 
-describe "Breadcrumbs" do
-  include Capybara
-
+describe "Breadcrumbs", :type => :integration do
   before(:each) { visit '/breadcrumbs_test' }
 
   it "should create the breadcrumb wrapper" do

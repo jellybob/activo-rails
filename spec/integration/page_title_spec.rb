@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe "Page titles" do
-  include Capybara
-  
   it "uses the specified title when provided by the view" do
     visit '/breadcrumbs_test'
     page.find("title").should have_content "Breadcrumbs"

@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe "Control Sets" do
-  include Capybara
-  
   before(:each) { visit "/control_sets_test" }
   
   it "should create the control wrapper" do

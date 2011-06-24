@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe "Secondary Navigation" do
-  include Capybara
-  
   before(:each) { visit "/secondary_navigation_test" }
 
   it "builds the wrapper around the menu" do

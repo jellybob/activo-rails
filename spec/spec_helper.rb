@@ -24,7 +24,8 @@ RSpec.configure do |config|
   # methods or matchers
   require 'rspec/expectations'
   config.include RSpec::Matchers
-
+  config.include Capybara::DSL, :type => :integration
+  
   # == Mock Framework
   config.mock_with :rspec
 end

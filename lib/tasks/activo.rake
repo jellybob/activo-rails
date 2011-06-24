@@ -42,6 +42,11 @@ namespace :activo do
     `mv #{paths[:javascripts]}/application.js #{paths[:javascripts]}/datepicker.js`
   end
   
+  desc "Download the FatCow icon set, and extract it to activo/images/icons"
+  task :download_icons do
+    puts %x{curl http://www.fatcow.com/fatcow-icons/fatcow-hosting-icons-2000.zip > icons.zip && unzip -u icons.zip -d #{File.expand_path("../../../activo/images/icons", __FILE__)} && rm icons.zip}
+  end
+
   desc 'rename all stylesheets to work with sprockets'
   task :prepare_stylesheets => :move_files do
     stylesheets_with_assets = [
@@ -125,7 +130,7 @@ EOF
   end
   
   desc "Update Activo2 from Git, and prepare it for use with activo-rails"
-  task :upgrade => [ :move_files, :create_application_files ] do
+  task :upgrade => [ :move_files, :create_application_files, :download_icons ] do
     puts "done with upgrading activo2"
   end
 end

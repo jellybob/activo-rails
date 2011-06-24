@@ -124,7 +124,8 @@ EOF
     end
   end
   
-  task :upgrade => :create_application_files do
+  desc "Update Activo2 from Git, and prepare it for use with activo-rails"
+  task :upgrade => [ :move_files, :create_application_files ] do
     puts "done with upgrading activo2"
   end
 end

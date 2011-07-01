@@ -140,7 +140,6 @@ form.formtastic fieldset > ol > li.boolean label {
 form.formtastic fieldset > ol > li {
   /* espaço entre duas linhas de campos */
   margin-bottom:10px;
-  list-style: none;
 }
 
 form.formtastic fieldset > ol > li.date fieldset ol li,
@@ -201,6 +200,7 @@ form.formtastic button.button, form.formtastic a.button {
 
 form.formtastic li.check_boxes {
 	list-style: none;
+	margin-bottom: .2em;
 }
 
 form.formtastic .choices legend {

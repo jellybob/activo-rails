@@ -3,3 +3,4 @@ pkg/*
 .bundle
 Gemfile.lock
 spec/dummy/log/*
+.DS_Store

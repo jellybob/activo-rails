@@ -198,14 +198,21 @@ form.formtastic button.button, form.formtastic a.button {
 #box .block .content form.formtastic fieldset > ol > li.check_boxes fieldset ol {
   width: 440px;
 }
-form.formtastic .choices legeng {
+
+form.formtastic li.check_boxes {
+	list-style: none;
+}
+
+form.formtastic .choices legend {
 	margin-bottom: 10px;
 }
+
 form.formtastic fieldset > ol > li.choice {
-	padding-left: 15px;
+	padding-left: 5px;
 }
+
 form.formtastic fieldset > ol > li.choice input {
-	padding-right: 5px;
+	margin-right: 5px;
 }
 
 #box .block .content form.formtastic fieldset > ol > li.check_boxes fieldset ol li label {

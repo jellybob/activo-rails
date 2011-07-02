@@ -46,6 +46,8 @@ worth it though.
 
 If you're using a decent text editor, it should be automatable anyway.
 
+If you're interested in a scaffold, check out the themed generator from web-app-theme (https://github.com/pilu/web-app-theme).
+
 ## View Helpers ##
 
 There are a few view helpers available to use which deal with some of the more awkward parts of
@@ -238,8 +240,26 @@ instance variable to do so.
 Activo is already set up to be used with Formtastic, but doesn't directly depend on it, since form
 builders are very much a matter of taste.
 
-If you would like to use it (and I recommend it), then just add `gem 'formtastic'` to your Gemfile, and everything
-will work out of the box.
+If you would like to use it (and I recommend it), then just add `gem 'formtastic'` to your Gemfile, and almost everything will work out of the box.
+
+Currently, if you'd like activo style buttons, you'll need to manually generate them, as the formtastic helper hasn't been updated to emit buttons yet. It should be coming for the 2.1 release. See https://github.com/justinfrench/formtastic/issues/11
+
+Also, the theme doesn't support the formtastic way of emitting buttons. Until this is all cleared up, if you want pretty buttons, your markup needs to be as follows:
+
+	<div class="group navform wat-cf">
+			<button class="button" type="submit">
+				<img src="stylesheets/themes/activo/images/icons/tick.png" alt="Save"> Save
+			</button>
+			<a href="#header" class="button">
+				<img src="stylesheets/themes/activo/images/icons/cross.png" alt="Cancel"> Cancel
+			</a>
+		</div>
+
+If you've used the web-app-theme themed generator, you'll need to manually update your forms to use formtastic. 
+
+## web-app-theme ##
+
+This theme is compatible with the generators from web-app-theme (https://github.com/pilu/web-app-theme). Some of the markup has diverged hasn't been fully tested. If you find issues, please fork and submit a pull.
 
 ## Contributing ##
 
@@ -264,8 +284,7 @@ Fixing jQuery UI image paths: Mike Park (http://github.com/mikepinde/)
 
 Fixing link options, and breadcrumbs: Nirmit Patel (http://github.com/NeMO84/)
 
-And thanks to the people brave enough to use this before it was released, or even had a readme, for provoking me into
-actually releasing the damn thing.
+And thanks to the people brave enough to use this before it was released, or even had a readme, for provoking me into actually releasing the damn thing.
 
 ## License ##
 

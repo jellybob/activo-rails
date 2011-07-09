@@ -51,12 +51,6 @@ A basic view, with a single content block, and a page title would look something
       <p>This is a basic Activo template.</p>
     <% end %>
 
-Unfortunatly there's a bit of divitis involved in using Activo. I'd like to reduce that with
-some more helpers, but I'm not entirely sure how to do so cleanly at the moment. It's probably
-worth it though.
-
-If you're using a decent text editor, it should be automatable anyway.
-
 ## View Helpers ##
 
 There are a few view helpers available to use which deal with some of the more awkward parts of
@@ -199,17 +193,6 @@ will be passed a NavigationBuilder instance which can be filled with items.
 When populating the user navigation you probably want to make the first argument a call to `image_tag`
 since the space available isn't big enough for anything other icons.
 
-### Status ###
-
-In the top right, opposite the logo, there's a section which can be filled with text to notify your users
-of important information. If a `status_menu` helper exists, the return value will be used to fill that space.
-    
-    module ApplicationHelper
-      def status_menu
-        "Welcome back Jon!"
-      end
-    end
-
 ### The Sidebar ###
 
 The sidebar is filled by a `sidebar` helper if one exists.
@@ -249,10 +232,6 @@ If you would like to use it (and I recommend it), then just add `gem 'formtastic
 will work out of the box.
 
 ## Contributing ##
-
-This is currently a very young gem. I'm using it in a couple of projects quite happily, but it could certainly
-use some smoothing out of the edges, and more view helpers. If you want to contribute, fork this repository, and
-send me a pull request when your feature is ready.
 
 Any contributions should come with accompanying tests, examples of which can be found in the spec/ directory.
 

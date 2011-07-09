@@ -1,16 +1,37 @@
 module Activo
   module Rails
     module Helper
-      # Adds a content box with #controls, a headline and other features
-      # 
-      # You can use box.controls to add controls to the box - see readme
-      # 
+      # Create a content box.
       #
-      # == options: ==
-      # * :headline -- a headline for the box. represented as h2 tag
+      # options - A hash of options to apply to the box.
+      # &block - The content of the box, passed an instance of BoxBuilder.
       #
+      # Valid options:
+      #
+      # * :headline -- The headline to show in the box.
+      # * :class -- A class to apply to the box.
+      # * :id -- The ID to apply to the box.
+      #
+      # Example:
+      #   <% content_box :headline => "My Box", :class => "alert", :id => "my_box" do |box| %>
+      #     <% box.navigation do |nav| %>
+      #       <% nav.item "List People", people_path, :active => true %>
+      #       <% nav.item "New Person", new_person_path %>
+      #       <% nav.item "Search", search_path(:type => "people") %>
+      #     <% end %>
+      #
+      #     <% box.breadcrumbs do |crumbs| %>
+      #       <% crumbs.item "Home", root_path %>
+      #       <% crumbs.item "People", people_path %>
+      #       <% crumbs.item "Bob Jones", person_path(@person), :active => true %>
+      #     <% end %>
+      #
+      #     <p>This is a really neat box, which will be displayed with a headline and navigation.</p>
+      #   <% end %>
+      # 
+      # Returns the completed box, yields an instance of BoxBuilder.
       def content_box(options = {}, &block)
-        box_buffer = BoxBuffer.new(self)
+        box_buffer = BoxBuilder.new(self)
         box_content = capture(box_buffer, &block)
         
         content_tag(:div, :class => 'block') do
@@ -208,33 +229,31 @@ module Activo
           }
         end
       end
-
-      # This class acts as buffer for content_box
-      #
-      class BoxBuffer
+    
+      # Provides a container for boxes that are currently being constructed.
+      class BoxBuilder
+        # :nodoc:
         attr_reader :buffers
         
+        # :nodoc:
         def initialize(parent)
           @parent = parent
           @buffers = { :block_header => '', :block_footer => '' }
         end
         
-        # Adds controls to this #content_box
-        #
+        # Sets the controls to display in this box. See Activo::Rails::Helper#controls.
         def controls(options = {}, &block)
           buffers[:block_header] << @parent.controls(options, &block)
           ''
         end
 
-        # Adds a secondary navigation to this #content_box
-        #
+        # Sets the navigation to display on this box. See Activo::Rails::Helper#navigation.
         def navigation(options = {}, &block)
           buffers[:block_header] << @parent.secondary_navigation(options, &block)
           ''
         end
 
-        # Adds a breadcrumb navigation to this #content_box
-        #
+        # Sets the breadcrumbs to display in this box. See Activo::Rails::Helper#breadcrumbs.
         def breadcrumbs(options = {}, &block)
           buffers[:block_footer] << @parent.breadcrumbs(options, &block)
           ''

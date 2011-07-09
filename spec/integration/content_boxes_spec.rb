@@ -22,10 +22,14 @@ describe "Content Boxes" do
   end
 
   describe "with a headline" do
+    before(:each) { visit '/content_boxes/with_headline' }
+    
     it "displays the headline as an h2" do
-      visit '/content_boxes/with_headline'
-
       page.should have_css("div.block h2", :content => "Headline")
+    end
+
+    it "displays the headline as the first item in the content section" do
+      page.should have_css("div.block div.content h2:first-child")
     end
   end
 
@@ -54,8 +58,15 @@ describe "Content Boxes" do
   end
 
   describe "with controls" do
-    pending "displays the controls"
-    pending "places the controls at the top of the box"
+    before(:each) { visit '/content_boxes/with_controls' }
+
+    it "displays the controls" do
+      page.should have_css("div.block div.control a[href='/example']", :content => "Example Control")
+    end
+
+    it "places the controls at the top of the box" do
+      page.should have_css("div.block div.control:first-child")
+    end
   end
 end
 

@@ -37,6 +37,7 @@ module Activo
         content_tag(:div, :class => 'block') do
           block_out = box_buffer.buffers[:block_header].html_safe
           block_out << content_tag(:div, :class => 'content') do
+            content_out = ''
             content_out = content_tag(:h2, options[:headline]) if options[:headline]
             content_out << content_tag(:div, box_content, :class => 'inner')
           end

@@ -65,7 +65,7 @@ module Activo
       # Returns the page title, first setting it if title is not nil.
       def page_title(title = nil)
         @title = title unless title.nil?
-        @title
+        @title || "Untitled Page"
       end
       
       # Display an icon

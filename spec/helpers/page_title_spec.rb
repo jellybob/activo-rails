@@ -15,4 +15,8 @@ describe Activo::Rails::Helper, "setting the page title" do
     view.page_title "A Title"
     view.page_title.should eq("A Title")
   end
+
+  it "returns 'Untitled Page' if no other value has been set" do
+    view.page_title.should eq("Untitled Page")
+  end
 end

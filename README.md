@@ -45,7 +45,7 @@ controllers, and the rest of the application will continue to use your default l
 
 A basic view, with a single content block, and a page title would look something like this.
 
-    <% page_title "Hello, world!" %>
+    <% provide :title, "Hello, world!" %>
     
     <%= content_box :headline => 'Hello, World!' do %>
       <p>This is a basic Activo template.</p>
@@ -64,9 +64,19 @@ Activo.
 
 ### Setting the Page Title ###
 
-As shown in the previous example, you can call `page_title` to set the title to be displayed.
+To set the page title from a view use the `provide` helper:
 
-    <% page_title "My Lovely Page" %>
+    <% provide :title, "My Lovely Page" %>
+
+By default if no title has been set then it will be "Untitled Page", but you can set an alternative
+by setting `@title` in your application controller:
+
+    class ApplicationController < ActionController::Base
+      before_filter :set_default_title
+      def set_default_title
+        @title = "My Site"
+      end
+    end
 
 ### Icons ###
 

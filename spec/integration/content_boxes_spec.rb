@@ -42,8 +42,15 @@ describe "Content Boxes" do
   end
   
   describe "with breadcrumbs" do
-    pending "displays the breadcrumbs"
-    pending "places the breadcrumbs at the bottom of the box"
+    before(:each) { visit '/content_boxes/with_breadcrumbs' }
+    
+    it "displays the breadcrumbs" do
+      page.should have_css("div.block div.breadcrumb ul li", :content => "Home")
+    end
+
+    it "places the breadcrumbs at the bottom of the box" do
+      page.should have_css("div.block div.breadcrumb:last-child")
+    end
   end
 
   describe "with controls" do

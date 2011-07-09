@@ -34,10 +34,17 @@ module Activo
         box_buffer = BoxBuilder.new(self)
         box_content = capture(box_buffer, &block)
         
-        content_tag(:div, :class => 'block') do
+        options = {
+          :id => nil,
+          :class => []
+        }.merge(options)
+        
+        block_class = ([ "block" ] + [ options[:class] ].flatten).join(" ")
+
+        content_tag(:div, :class => block_class, :id => options[:id]) do
           block_out = box_buffer.buffers[:block_header].html_safe
-          block_out << content_tag(:div, :class => 'content') do
-            content_out = ''
+          block_out << content_tag(:div, :class => "content") do
+            content_out = ''.html_safe
             content_out = content_tag(:h2, options[:headline]) if options[:headline]
             content_out << content_tag(:div, box_content, :class => 'inner')
           end

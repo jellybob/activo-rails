@@ -22,12 +22,23 @@ describe "Content Boxes" do
   end
 
   describe "with a headline" do
-    pending "displays the headline as an h2"
+    it "displays the headline as an h2" do
+      visit '/content_boxes/with_headline'
+
+      page.should have_css("div.block h2", :content => "Headline")
+    end
   end
 
   describe "with navigation" do
-    pending "displays the navigation menu"
-    pending "places the navigation menu at the top of the box"
+    before(:each) { visit '/content_boxes/with_navigation' }
+   
+    it "displays the navigation menu" do
+      page.should have_css("div.block div.secondary-navigation ul li", :content => "Home")
+    end
+
+    it "places the navigation menu at the top of the box" do
+      page.should have_css("div.block div.secondary-navigation:first-child")
+    end
   end
   
   describe "with breadcrumbs" do

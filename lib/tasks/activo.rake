@@ -101,8 +101,8 @@ namespace :activo do
   end
   
   task :create_application_files => :prepare_stylesheets do
-    puts "creating application.js"
-    File.open("#{paths[:stylesheets]}/application.css.scss", 'w+') do |file|
+    puts "creating index.css"
+    File.open("#{paths[:stylesheets]}/index.css.scss", 'w+') do |file|
       data = <<EOF
 #=require ./base
 #=require ./jquery-ui
@@ -117,8 +117,8 @@ EOF
       file.write(data)
     end
     
-    puts "creating application.js"
-    File.open("#{paths[:javascripts]}/application.js", 'w+') do |file|
+    puts "creating index.js"
+    File.open("#{paths[:javascripts]}/index.js", 'w+') do |file|
       data= <<EOF
 //= require jquery
 //= require jquery-ui

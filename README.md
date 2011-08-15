@@ -11,19 +11,23 @@ There are also a few view helpers available to simplify the creation of common U
 such as button lists, breadcrumbs, and menus.
 
 ## !Experimental Rails 3.1 Branch! ##
-This branch is experimental and requires rails 3.1 (Release candiate 4 at the moment).
-To deploy it in production (make "rake assets:precompile" work) you have to modify the asset pipeline configuration as follows:
-
+This branch is experimental and requires rails 3.1 (Release candiate 5 at the moment).
+To deploy it in production you have to enable the asset pipeline as follows
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    config.assets.precompile = [ 
-      /ie\.css$/,
-      /\w+\.(?!js|css).+/,
-      /application\.(js|css)$/
-    ]
+After this, you have to add two require statements to your javascript / css assets:
+
+### application.css (or however your main CSS is named): ###
+
+    //=require 'activo-rails'
   
-This will make rails compile the application.js/.css files which are required by activo rails.
+### application.js (or however your main Javascript is named): ###
+
+    //=require 'activo-rails'
+    
+Easy, eh?  
+This will include everything you might need in your main js/css.
 
 ## Installing ##
 

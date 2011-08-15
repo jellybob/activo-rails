@@ -4,8 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title><%= content_for?(:title) ? yield(:title) : page_title %></title>
   
-  <%= stylesheet_link_tag "activo-rails/application.css", :media => "screen" %>  
-  <%= javascript_include_tag 'activo-rails/application' %>
+  <%= stylesheet_link_tag "activo-rails.css", :media => "screen" %>  
+  <%= javascript_include_tag 'activo-rails.js' %>
   <%= csrf_meta_tag %>
   
   <%= head if respond_to? :head %>

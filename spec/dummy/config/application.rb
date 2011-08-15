@@ -5,6 +5,7 @@ require "action_controller/railtie"
 require "action_view/railtie"
 require "action_mailer/railtie"
 require "sprockets/railtie"
+require "jquery-rails"
 
 Bundler.require
 require "activo/rails"

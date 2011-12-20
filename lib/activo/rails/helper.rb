@@ -108,7 +108,10 @@ module Activo
         
         content_tag("div", options) do
           items.collect { |item|
-            item[:label] = (icon(item[:icon]) + item[:label]).html_safe if item[:icon]
+            if item[:icon]
+              image = image_tag(asset_path "activo-rails/icons/#{item[:icon]}.png")
+              item[:label] = "#{image} #{item[:label]}".html_safe
+            end
             link_to(item[:label], item[:href], item[:link_options].merge(:class => "button"))
           }.join("").html_safe
         end

@@ -10,7 +10,7 @@ namespace :activo do
   task :download_from_git do
     puts "checking out activo2"
     `rm -rf activo`
-    `git clone https://github.com/dmfrancisco/activo.git --branch activo-2`
+    `git clone https://github.com/tobsch/activo.git --branch activo-2`
   end
 
   # upgrade activo2 from the official repository

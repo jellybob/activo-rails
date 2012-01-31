@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = "activo-rails"
   s.version     = Activo::Rails::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Jon Wood"]
-  s.email       = ["jon@blankpad.net"]
+  s.authors     = ["Jon Wood", "Tobias Schlottke"]
+  s.email       = ["jon@blankpad.net", "tobias.schlottke@gmail.com"]
   s.homepage    = "http://github.com/jellybob/activo-rails"
   s.summary     = %q{Provides Rails integration for the Activo web app theme.}
   s.description = %q{Provides Rails integration for the Activo web app theme.}
@@ -20,10 +20,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   s.add_development_dependency "rake"
   s.add_development_dependency "nokogiri"
-  s.add_development_dependency "sass", "~> 3.2.0.alpha.8"
+  s.add_development_dependency "sass", "~> 3.2.0.alpha.63"
   s.add_development_dependency "actionpack"
-  s.add_development_dependency "rails", ">= 3.1.0.rc4"
+  s.add_development_dependency "rails", ">= 3.1.0"
   s.add_development_dependency "jquery-rails", ">= 1.0.9"
   s.add_development_dependency "capybara", ">= 0.4.0"
-  s.add_development_dependency "rspec-rails", ">= 2.0.0.beta"
+  s.add_development_dependency "rspec-rails", ">= 2.0.0"
 end
